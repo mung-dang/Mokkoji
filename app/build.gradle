@@ -50,4 +50,7 @@ dependencies {
 
     //gson
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    //lottie
+    implementation 'com.airbnb.android:lottie:5.2.0'
 }
