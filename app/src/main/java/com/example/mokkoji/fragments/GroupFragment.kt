@@ -1,11 +1,13 @@
 package com.example.mokkoji.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mokkoji.AddGroupActivity
 import com.example.mokkoji.R
 import com.example.mokkoji.adapters.GroupRecyclerAdapter
 import com.example.mokkoji.databinding.FragmentGroupBinding
@@ -14,11 +16,8 @@ import com.example.mokkoji.datas.GroupData
 class GroupFragment : BaseFragment() {
 
     lateinit var binding: FragmentGroupBinding
-
     lateinit var mGroupAdapter: GroupRecyclerAdapter
     val mGroupList = ArrayList<GroupData>()
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,8 +27,21 @@ class GroupFragment : BaseFragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_group, container, false)
         return binding.root
     }
-    override fun setupEvents() {
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupEvents()
+        setValues()
+    }
+
+    override fun setupEvents() {
+        binding.groupRecyclerView.setOnClickListener {
+
+        }
+        binding.addGroupBtn.setOnClickListener {
+            val myIntent = Intent(mContext, AddGroupActivity::class.java)
+            startActivity(myIntent)
+        }
     }
 
     override fun setValues() {
