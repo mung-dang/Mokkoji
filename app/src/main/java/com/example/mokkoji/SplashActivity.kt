@@ -32,7 +32,7 @@ class SplashActivity : BaseActivity() {
                 val isAutoLogin = ContextUtil.getAutoLogin(mContext)
 
                 if(isTokenOk && isAutoLogin){
-                    Toast.makeText(mContext, "${GlobalData.loginUser!!.nick_name}님 환영합니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(mContext, "환영합니다.", Toast.LENGTH_SHORT).show()
                     val myIntent = Intent(mContext, MainActivity::class.java)
                     startActivity(myIntent)
                 }else{

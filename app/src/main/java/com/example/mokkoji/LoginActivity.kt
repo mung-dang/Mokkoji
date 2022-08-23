@@ -10,6 +10,7 @@ import com.example.mokkoji.datas.BasicResponse
 import com.example.mokkoji.utils.ContextUtil
 import com.example.mokkoji.utils.GlobalData
 import com.google.android.material.internal.ContextUtils
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,7 +39,7 @@ class LoginActivity : BaseActivity() {
                     if (response.isSuccessful){
                         val br = response.body()!!
 
-                        Toast.makeText(mContext, "${br.data.user.nick_name}님 환영합니다.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(mContext, "환영합니다.", Toast.LENGTH_SHORT).show()
 
                         GlobalData.loginUser = br.data.user
 
@@ -48,6 +49,18 @@ class LoginActivity : BaseActivity() {
                         val myIntent = Intent(mContext, MainActivity::class.java)
                         startActivity(myIntent)
                         finish()
+                    }else {
+                        val errorBody = response.errorBody()!!.string()
+                        val jsonObj = JSONObject(errorBody)
+                        val code = jsonObj.getInt("code")
+                        val message = jsonObj.getString("message")
+
+                        if (code == 400){
+                            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+                        }
+                        else {
+                            Toast.makeText(mContext, "오류가 발생했습니다", Toast.LENGTH_SHORT).show()
+                        }
                     }
 
 
