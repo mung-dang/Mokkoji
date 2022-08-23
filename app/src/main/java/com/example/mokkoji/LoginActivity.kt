@@ -9,7 +9,6 @@ import com.example.mokkoji.databinding.ActivityLoginBinding
 import com.example.mokkoji.datas.BasicResponse
 import com.example.mokkoji.utils.ContextUtil
 import com.example.mokkoji.utils.GlobalData
-import com.google.android.material.internal.ContextUtils
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback

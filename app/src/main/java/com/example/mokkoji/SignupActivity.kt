@@ -106,12 +106,8 @@ class SignupActivity : BaseActivity() {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
                 if(response.isSuccessful){
                     when(type) {
-                        "EMAIL" -> {
-                            isEmailOk = true
-                        }
-                        "NICK_NAME" -> {
-                            isNickOk = true
-                        }
+                        "EMAIL" -> isEmailOk = true
+                        "NICK_NAME" -> isNickOk = true
                     }
                 }else{
                     val message = response.message()
