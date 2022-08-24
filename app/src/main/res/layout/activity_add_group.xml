@@ -29,6 +29,7 @@
             android:text="당신의 모꼬지 이름은?"/>
 
         <EditText
+            android:id="@+id/titleEdt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_editbox"
@@ -47,13 +48,14 @@
             android:text="모꼬지의 목표는?"/>
 
         <EditText
+            android:id="@+id/goalEdt"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="@drawable/custom_editbox"
             android:padding="10dp"
             android:layout_marginBottom="30dp"
             android:inputType="text"
-            android:imeOptions="actionNext"
+            android:imeOptions="actionDone"
             android:maxLines="5"
             android:hint="50자 이내"/>
 

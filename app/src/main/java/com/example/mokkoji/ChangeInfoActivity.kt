@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.mokkoji.databinding.ActivityAddGroupBinding
 import com.example.mokkoji.databinding.ActivityChangeInfoBinding
 import com.example.mokkoji.databinding.ActivityGroupBinding
+import com.example.mokkoji.datas.GroupData
 
 class ChangeInfoActivity : BaseActivity() {
 

@@ -43,9 +43,9 @@ class GroupFragment : BaseFragment() {
     }
 
     override fun setValues() {
-        mGroupList.add(GroupData( "학원가기", "총 인원 수 : 3"))
-        mGroupList.add(GroupData( "배드민턴", "총 인원 수 : 2"))
-        mGroupList.add(GroupData( "게임", "총 인원 수 : 5"))
+        mGroupList.add(GroupData( "학원가기", 3))
+        mGroupList.add(GroupData( "배드민턴", 2))
+        mGroupList.add(GroupData( "게임", 5))
 
         mGroupAdapter = GroupRecyclerAdapter(mContext, mGroupList)
         binding.groupRecyclerView.adapter = mGroupAdapter

@@ -22,7 +22,7 @@ class GroupRecyclerAdapter(
             val groupExp = itemView.findViewById<TextView>(R.id.groupExpTxt)
 
             title.text = item.title
-            groupExp.text = item.groupExp
+            groupExp.text = "총 인원 수 : " + item.groupTotal
 
             itemView.setOnClickListener {
                 val myIntent = Intent(mContext, GroupActivity::class.java)
