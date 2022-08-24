@@ -40,8 +40,6 @@ class LoginActivity : BaseActivity() {
 
                         ContextUtil.setLoginToken(mContext, br.data.token)
 
-                        Log.d("접속 토큰", br.data.token)
-
                         ContextUtil.setAutoLogin(mContext, binding.autoLoginCb.isChecked)
 
                         GlobalData.loginUser = br.data.user

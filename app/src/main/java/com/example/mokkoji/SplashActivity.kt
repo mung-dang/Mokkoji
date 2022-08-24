@@ -6,9 +6,13 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
+import com.example.mokkoji.datas.BasicResponse
 import com.example.mokkoji.utils.ContextUtil
 import com.example.mokkoji.utils.GlobalData
 import com.google.android.material.internal.ContextUtils
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SplashActivity : BaseActivity() {
 
@@ -22,6 +26,18 @@ class SplashActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+        val token = ContextUtil.getLoginToken(mContext)
+        apiList.getRequestInfo(token).enqueue(object : Callback<BasicResponse>{
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+                if(response.isSuccessful){
+                    isTokenOk = true
+                }
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+            }
+        })
     }
 
     override fun setValues() {
