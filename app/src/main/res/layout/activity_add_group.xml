@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-
+        android:background="@color/white_pink"
         android:padding="20dp"
         tools:context=".AddGroupActivity">
 
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:textSize="16sp"
-            android:text="어떤 모꼬지인가요?"/>
+            android:text="모꼬지의 목표는?"/>
 
         <EditText
             android:layout_width="match_parent"
