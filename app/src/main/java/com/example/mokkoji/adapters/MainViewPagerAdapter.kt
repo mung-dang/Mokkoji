@@ -15,8 +15,8 @@ class MainViewPagerAdapter(
 
     override fun createFragment(position: Int): Fragment {
         return when(position){
-            0 -> ProfileFragment()
-            else -> GroupFragment()
+            0 -> GroupFragment()
+            else -> ProfileFragment()
         }
     }
 }

@@ -22,8 +22,8 @@ class MainActivity : BaseActivity() {
     override fun setupEvents() {
         binding.mainBottomNav.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.home -> binding.mainViewPager.currentItem = 0
-                R.id.group -> binding.mainViewPager.currentItem = 1
+                R.id.group -> binding.mainViewPager.currentItem = 0
+                R.id.setting -> binding.mainViewPager.currentItem = 1
             }
             return@setOnItemSelectedListener true
         }
@@ -33,11 +33,12 @@ class MainActivity : BaseActivity() {
                 super.onPageSelected(position)
 
                 binding.mainBottomNav.selectedItemId = when (position){
-                    0 -> R.id.home
-                    else -> R.id.group
+                    0 -> R.id.group
+                    else -> R.id.setting
                 }
             }
         })
+
     }
 
     override fun setValues() {

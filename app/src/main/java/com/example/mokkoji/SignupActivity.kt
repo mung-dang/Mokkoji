@@ -28,26 +28,31 @@ class SignupActivity : BaseActivity() {
     override fun setupEvents() {
         binding.signupBtn.setOnClickListener {
             val inputEmail = binding.emailEdt.text.toString()
-            val inputNick = binding.nickEdt.text.toString()
             val inputPassword = binding.passwordEdt.toString()
             val passwordCheck = binding.passwordCheckEdt.toString()
+            val inputNick = binding.nickEdt.text.toString()
 
             if (inputEmail.isBlank()){
                 Toast.makeText(mContext, "이메일을 입력하지 않으셨어요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+
             if(inputPassword.isBlank()){
                 Toast.makeText(mContext, "비밀번호를 입력하지 않으셨어요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+
             if(inputPassword != passwordCheck){
                 Toast.makeText(mContext, "비밀번호가 일치하지 않아요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+
+
             if(inputNick.isBlank()){
                 Toast.makeText(mContext, "닉네임을 입력하지 않으셨어요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+
             if (!isEmailOk || !isNickOk){
                 Toast.makeText(mContext, "중복확인을 하지 않으셨어요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -62,7 +67,7 @@ class SignupActivity : BaseActivity() {
                 ) {
                     if(response.isSuccessful){
                         val br = response.body()!!
-                        Toast.makeText(mContext, "가입을 환영합니다!!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(mContext, "가입을 환영합니다!", Toast.LENGTH_SHORT).show()
                         finish()
                     }
                     else{
@@ -73,10 +78,6 @@ class SignupActivity : BaseActivity() {
                         if(code == 400){
                             Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
                         }
-                        else{
-                            Toast.makeText(mContext, "오류가 발생했습니다", Toast.LENGTH_SHORT).show()
-                        }
-
                     }
                 }
 
@@ -85,6 +86,8 @@ class SignupActivity : BaseActivity() {
                 }
 
             })
+
+
         }
 
         binding.emailCheckBtn.setOnClickListener {
@@ -109,6 +112,7 @@ class SignupActivity : BaseActivity() {
                         "EMAIL" -> isEmailOk = true
                         "NICK_NAME" -> isNickOk = true
                     }
+                    Toast.makeText(mContext, "중복된 정보가 없습니다", Toast.LENGTH_SHORT).show()
                 }else{
                     val message = response.message()
                     Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()

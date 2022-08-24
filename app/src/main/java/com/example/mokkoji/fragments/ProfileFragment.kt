@@ -1,10 +1,12 @@
 package com.example.mokkoji.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import com.example.mokkoji.ChangeInfoActivity
 import com.example.mokkoji.R
 import com.example.mokkoji.databinding.FragmentProfileBinding
 
@@ -28,7 +30,10 @@ class ProfileFragment : BaseFragment() {
     }
 
     override fun setupEvents() {
-
+        binding.profileLayout.setOnClickListener {
+            val myIntent = Intent(mContext, ChangeInfoActivity::class.java)
+            startActivity(myIntent)
+        }
     }
 
     override fun setValues() {

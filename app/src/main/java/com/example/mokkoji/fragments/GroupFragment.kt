@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mokkoji.AddGroupActivity
+import com.example.mokkoji.GroupActivity
 import com.example.mokkoji.R
 import com.example.mokkoji.adapters.GroupRecyclerAdapter
 import com.example.mokkoji.databinding.FragmentGroupBinding
@@ -36,7 +37,8 @@ class GroupFragment : BaseFragment() {
 
     override fun setupEvents() {
         binding.groupRecyclerView.setOnClickListener {
-
+            val myIntent = Intent(mContext, GroupActivity::class.java)
+            startActivity(myIntent)
         }
         binding.addGroupBtn.setOnClickListener {
             val myIntent = Intent(mContext, AddGroupActivity::class.java)
@@ -45,9 +47,9 @@ class GroupFragment : BaseFragment() {
     }
 
     override fun setValues() {
-        mGroupList.add(GroupData( "학원가기", "수학학원가는 모임"))
-        mGroupList.add(GroupData( "배드민턴", "배드민턴치는 모임"))
-        mGroupList.add(GroupData( "게임", "게임하는 모임"))
+        mGroupList.add(GroupData( "학원가기", "총 인원 수 : 3"))
+        mGroupList.add(GroupData( "배드민턴", "총 인원 수 : 2"))
+        mGroupList.add(GroupData( "게임", "총 인원 수 : 5"))
 
         mGroupAdapter = GroupRecyclerAdapter(mContext, mGroupList)
         binding.groupRecyclerView.adapter = mGroupAdapter

@@ -1,8 +1,8 @@
 package com.example.mokkoji
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.mokkoji.databinding.ActivityLoginBinding
@@ -38,12 +38,15 @@ class LoginActivity : BaseActivity() {
                     if (response.isSuccessful){
                         val br = response.body()!!
 
-                        Toast.makeText(mContext, "환영합니다.", Toast.LENGTH_SHORT).show()
+                        ContextUtil.setLoginToken(mContext, br.data.token)
+
+                        Log.d("접속 토큰", br.data.token)
+
+                        ContextUtil.setAutoLogin(mContext, binding.autoLoginCb.isChecked)
 
                         GlobalData.loginUser = br.data.user
 
-                        ContextUtil.setAutoLogin(mContext, binding.autoLoginCb.isChecked)
-                        ContextUtil.setLoginToken(mContext, br.data.token)
+                        Toast.makeText(mContext, "환영합니다.", Toast.LENGTH_SHORT).show()
 
                         val myIntent = Intent(mContext, MainActivity::class.java)
                         startActivity(myIntent)
@@ -57,16 +60,11 @@ class LoginActivity : BaseActivity() {
                         if (code == 400){
                             Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
                         }
-                        else {
-                            Toast.makeText(mContext, "오류가 발생했습니다", Toast.LENGTH_SHORT).show()
-                        }
                     }
-
-
                 }
 
                 override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
-
+                    Log.e("로그인 에러", t.toString())
                 }
             })
 

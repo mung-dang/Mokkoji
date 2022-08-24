@@ -8,8 +8,10 @@
     <color name="gray">#545454</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="white_gray">#F6F6F6</color>
     <color name="mint_blue">#AEE4E2</color>
     <color name="mint_blue2">#12887A</color>
+    <color name="gray_purple">#8785A2</color>
     <color name="pink">#EA8484</color>
     <color name="white_pink">#F0D7D2</color>
 </resources>
