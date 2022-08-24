@@ -36,10 +36,6 @@ class GroupFragment : BaseFragment() {
     }
 
     override fun setupEvents() {
-        binding.groupRecyclerView.setOnClickListener {
-            val myIntent = Intent(mContext, GroupActivity::class.java)
-            startActivity(myIntent)
-        }
         binding.addGroupBtn.setOnClickListener {
             val myIntent = Intent(mContext, AddGroupActivity::class.java)
             startActivity(myIntent)

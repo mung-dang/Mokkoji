@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.mokkoji.ChangeInfoActivity
 import com.example.mokkoji.R
@@ -31,8 +32,7 @@ class ProfileFragment : BaseFragment() {
 
     override fun setupEvents() {
         binding.profileLayout.setOnClickListener {
-            val myIntent = Intent(mContext, ChangeInfoActivity::class.java)
-            startActivity(myIntent)
+            Toast.makeText(mContext, "변경하시겠습니까", Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -1,11 +1,13 @@
 package com.example.mokkoji.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mokkoji.GroupActivity
 import com.example.mokkoji.R
 import com.example.mokkoji.datas.GroupData
 
@@ -22,6 +24,10 @@ class GroupRecyclerAdapter(
             title.text = item.title
             groupExp.text = item.groupExp
 
+            itemView.setOnClickListener {
+                val myIntent = Intent(mContext, GroupActivity::class.java)
+                mContext.startActivity(myIntent)
+            }
         }
     }
 
