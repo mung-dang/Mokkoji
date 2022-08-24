@@ -17,6 +17,8 @@ import retrofit2.Response
 class SplashActivity : BaseActivity() {
 
     var isTokenOk = false
+    lateinit var nick : String
+    lateinit var password : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +32,9 @@ class SplashActivity : BaseActivity() {
         apiList.getRequestInfo(token).enqueue(object : Callback<BasicResponse>{
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
                 if(response.isSuccessful){
+                    val br = response.body()!!
                     isTokenOk = true
+                    GlobalData.loginUser = br.data.user
                 }
             }
 
@@ -38,6 +42,7 @@ class SplashActivity : BaseActivity() {
 
             }
         })
+
     }
 
     override fun setValues() {
