@@ -7,7 +7,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:background="@color/white_pink"
         android:padding="50dp"
         tools:context=".LoginActivity">
 
@@ -82,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="16sp"
-                android:backgroundTint="@color/pink"
+                android:backgroundTint="@color/sea_blue"
                 android:textStyle="bold"
                 android:text="  로그인  "/>
 
@@ -92,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
                 android:textSize="16sp"
-                android:backgroundTint="@color/pink"
+                android:backgroundTint="@color/sea_blue"
                 android:textStyle="bold"
                 android:text="회원가입"/>
 

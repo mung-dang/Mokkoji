@@ -4,7 +4,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/white_pink"
         android:padding="25dp">
 
         <LinearLayout
@@ -34,14 +33,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:textSize="20sp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
                     android:text="닉네임"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
                     android:text="안녕하세요!"/>
 
             </LinearLayout>
@@ -54,6 +55,19 @@
             android:textSize="20sp"
             android:text="설정"/>
 
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/logoutBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:backgroundTint="@color/sea_blue"
+            android:textStyle="bold"
+            android:text="로그아웃"/>
 
     </LinearLayout>
 </layout>

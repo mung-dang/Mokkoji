@@ -8,7 +8,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:background="#F0D7D2"
         android:padding="20dp"
         tools:context=".SignupActivity">
 
@@ -26,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:gravity="center"
             android:layout_marginBottom="30dp">
 
             <EditText
@@ -44,7 +44,7 @@
                 android:id="@+id/emailCheckBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/pink"
+                android:backgroundTint="@color/sea_blue"
                 android:layout_marginStart="10dp"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -87,6 +87,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp">
 
@@ -106,7 +107,7 @@
                 android:id="@+id/nickCheckBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/pink"
+                android:backgroundTint="@color/sea_blue"
                 android:layout_marginStart="10dp"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -118,7 +119,7 @@
             android:id="@+id/signupBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/pink"
+            android:backgroundTint="@color/sea_blue"
             android:textSize="16sp"
             android:textStyle="bold"
             android:text="회원가입"/>

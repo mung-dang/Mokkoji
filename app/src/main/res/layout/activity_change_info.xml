@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="25dp"
@@ -22,12 +22,13 @@
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_editbox"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/pink"
+            android:backgroundTint="@color/sea_blue"
             android:textStyle="bold"
             android:text="변경하기"/>
 
@@ -38,14 +39,15 @@
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_editbox"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/pink"
-            android:textStyle="bold"
-            android:text="변경하기"/>
+            android:backgroundTint="@color/sea_blue"
+            android:text="변경하기"
+            android:textStyle="bold" />
 
     </LinearLayout>
 </layout>
