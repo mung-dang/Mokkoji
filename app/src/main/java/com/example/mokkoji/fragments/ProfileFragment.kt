@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import com.example.mokkoji.ChangeInfoActivity
 import com.example.mokkoji.R
 import com.example.mokkoji.databinding.FragmentProfileBinding
+import com.example.mokkoji.utils.GlobalData
 
 class ProfileFragment : BaseFragment() {
 
@@ -37,6 +37,8 @@ class ProfileFragment : BaseFragment() {
     }
 
     override fun setValues() {
+        val nick_name = GlobalData.loginUser!!.nick_name
+        binding.nickTxt.text = nick_name
 
     }
 }

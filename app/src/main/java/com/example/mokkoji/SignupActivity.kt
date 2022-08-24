@@ -28,28 +28,17 @@ class SignupActivity : BaseActivity() {
     override fun setupEvents() {
         binding.signupBtn.setOnClickListener {
             val inputEmail = binding.emailEdt.text.toString()
-            val inputPassword = binding.passwordEdt.toString()
-            val passwordCheck = binding.passwordCheckEdt.toString()
+            val inputPassword = binding.passwordEdt.text.toString()
+            val passwordCheck = binding.passwordCheckEdt.text.toString()
             val inputNick = binding.nickEdt.text.toString()
 
-            if (inputEmail.isBlank()){
-                Toast.makeText(mContext, "이메일을 입력하지 않으셨어요.", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            if(inputPassword.isBlank()){
-                Toast.makeText(mContext, "비밀번호를 입력하지 않으셨어요", Toast.LENGTH_SHORT).show()
+            if (inputEmail.isBlank() || inputPassword.isBlank() || inputNick.isBlank()){
+                Toast.makeText(mContext, "공백이 있습니다", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if(inputPassword != passwordCheck){
                 Toast.makeText(mContext, "비밀번호가 일치하지 않아요", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-
-            if(inputNick.isBlank()){
-                Toast.makeText(mContext, "닉네임을 입력하지 않으셨어요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 

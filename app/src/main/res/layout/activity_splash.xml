@@ -9,19 +9,12 @@
         android:gravity="center"
         tools:context=".SplashActivity">
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            app:lottie_rawRes="@raw/ham"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="50sp"
-            android:text="로딩중"/>
+            android:textSize="30sp"
+            android:text="모꼬지 로딩중"/>
 
     </LinearLayout>
 </layout>
