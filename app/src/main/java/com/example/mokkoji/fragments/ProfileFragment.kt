@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.databinding.DataBindingUtil
 import com.example.mokkoji.ChangeInfoActivity
 import com.example.mokkoji.LoginActivity
@@ -35,8 +34,8 @@ class ProfileFragment : BaseFragment() {
 
     override fun setupEvents() {
         binding.profileLayout.setOnClickListener {
-//            val myIntent = Intent(mContext, ChangeInfoActivity::class.java)
-//            startActivity(myIntent)
+            val myIntent = Intent(mContext, ChangeInfoActivity::class.java)
+            startActivityForResult(myIntent, 1000)
         }
         binding.logoutBtn.setOnClickListener {
             ContextUtil.clearData(mContext)

@@ -16,11 +16,12 @@
             android:padding="10dp"
             android:background="@drawable/custom_profilebox">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:src="@mipmap/ic_launcher_round"/>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profileImg"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@mipmap/ic_launcher_round"
+                android:layout_marginEnd="20dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

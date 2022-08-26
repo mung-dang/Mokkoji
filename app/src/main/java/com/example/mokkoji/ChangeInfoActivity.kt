@@ -17,6 +17,7 @@ class ChangeInfoActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+
     }
 
     override fun setValues() {

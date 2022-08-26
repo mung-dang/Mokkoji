@@ -9,20 +9,20 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mokkoji.GroupActivity
 import com.example.mokkoji.R
-import com.example.mokkoji.datas.GroupData
+import com.example.mokkoji.datas.PlacesData
 
 class GroupRecyclerAdapter(
     val mContext: Context,
-    val mList: List<GroupData>
+    val mList: List<PlacesData>
 ) : RecyclerView.Adapter<GroupRecyclerAdapter.MyViewHolder>(){
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        fun bind(item : GroupData){
+        fun bind(item : PlacesData){
             val title = itemView.findViewById<TextView>(R.id.titleTxt)
             val groupExp = itemView.findViewById<TextView>(R.id.groupExpTxt)
 
             title.text = item.title
-            groupExp.text = "총 인원 수 : " + item.groupTotal
+
 
             itemView.setOnClickListener {
                 val myIntent = Intent(mContext, GroupActivity::class.java)
