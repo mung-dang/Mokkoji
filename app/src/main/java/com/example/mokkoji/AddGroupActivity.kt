@@ -1,18 +1,20 @@
 package com.example.mokkoji
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.mokkoji.databinding.ActivityAddGroupBinding
-import com.example.mokkoji.databinding.ActivityGroupBinding
-import com.example.mokkoji.datas.GroupData
-import com.example.mokkoji.utils.GlobalData
+import com.example.mokkoji.datas.BasicResponse
+import com.example.mokkoji.datas.PlacesData
+import com.example.mokkoji.utils.ContextUtil
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class AddGroupActivity : BaseActivity() {
 
     lateinit var binding: ActivityAddGroupBinding
-    val mGroupList = ArrayList<GroupData>()
+    val mGroupList = ArrayList<PlacesData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,18 +27,37 @@ class AddGroupActivity : BaseActivity() {
         binding.addGroupBtn.setOnClickListener {
             val inputTitle = binding.titleEdt.text.toString()
             val inputGoal = binding.goalEdt.text
+            val token = ContextUtil.getLoginToken(mContext)
 
             if(inputTitle.isBlank() || inputGoal.isBlank()){
                 Toast.makeText(mContext, "공백없이 채워주세요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            mGroupList.add(GroupData(inputTitle, 0))
-            finish()
+            apiList.postRequestAddGroup(token, inputTitle, 0, 0, false).enqueue(object : Callback<BasicResponse>{
+                override fun onResponse(
+                    call: Call<BasicResponse>,
+                    response: Response<BasicResponse>
+                ) {
+                    if(response.isSuccessful){
+                        val br = response.body()!!
+                        finish()
+
+                    }
+
+                }
+
+                override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                }
+
+            })
+
+
         }
     }
 
     override fun setValues() {
-
+        setCustomActionBar()
     }
 }

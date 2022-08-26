@@ -43,5 +43,6 @@ class MainActivity : BaseActivity() {
     override fun setValues() {
         mPagerAdapter = MainViewPagerAdapter(this)
         binding.mainViewPager.adapter = mPagerAdapter
+        setCustomActionBar()
     }
 }

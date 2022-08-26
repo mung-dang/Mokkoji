@@ -9,14 +9,6 @@
         android:gravity="center_horizontal"
         tools:context=".GroupActivity">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:textSize="20sp"
-            android:layout_marginBottom="20dp"
-            android:text="모임 목표"/>
-
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/groupViewPager"
             android:layout_width="match_parent"

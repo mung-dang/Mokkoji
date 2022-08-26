@@ -31,4 +31,19 @@ interface APIList {
     fun getRequestInfo(
         @Header("X-Http-Token") token : String
     ) : Call<BasicResponse>
+
+    @FormUrlEncoded
+    @POST("/user/place")
+    fun postRequestAddGroup(
+        @Header("X-Http-Token") token: String,
+        @Field("name") title: String,
+        @Field("latitude") latitude : Int,
+        @Field("longitude") longitude : Int,
+        @Field("is_primary") primary : Boolean
+    ) : Call<BasicResponse>
+
+    @GET("/user/place")
+    fun getRequestAddGroup(
+        @Header("X-Http-Token") token: String
+    ) : Call<BasicResponse>
 }

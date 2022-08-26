@@ -90,7 +90,7 @@ class SignupActivity : BaseActivity() {
     }
 
     override fun setValues() {
-
+        setCustomActionBar()
     }
 
     fun dupCheck(type: String, value : String){

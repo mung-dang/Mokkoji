@@ -8,7 +8,14 @@
         android:orientation="vertical"
         android:background="@color/sea_blue"
         android:gravity="center"
+        android:paddingBottom="50dp"
         tools:context=".SplashActivity">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/logo2"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -16,7 +23,7 @@
             android:textSize="30sp"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:text="모꼬지 로딩중"/>
+            android:text="로딩중"/>
 
     </LinearLayout>
 </layout>

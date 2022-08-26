@@ -45,5 +45,7 @@ class GroupActivity : BaseActivity() {
     override fun setValues() {
         mPagerAdapter = GroupViewPagerAdapter(this)
         binding.groupViewPager.adapter = mPagerAdapter
+
+        setCustomActionBar()
     }
 }
