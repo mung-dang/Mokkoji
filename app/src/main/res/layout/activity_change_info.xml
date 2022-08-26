@@ -9,37 +9,26 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="대표 이미지"/>
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="닉네임"/>
+            android:layout_marginBottom="10dp"
+            android:text="현재 비밀번호"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/custom_editbox"/>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/sea_blue"
-            android:textStyle="bold"
-            android:text="변경하기"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="비밀번호"/>
+            android:layout_marginBottom="10dp"
+            android:text="변경할 비밀번호"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/custom_editbox"/>
 
         <Button

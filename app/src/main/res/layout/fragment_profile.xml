@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -21,32 +21,26 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@mipmap/ic_launcher_round"
-                android:layout_marginEnd="20dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_marginEnd="30dp"/>
 
                 <TextView
                     android:id="@+id/nickTxt"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:textSize="20sp"
+                    android:layout_weight="1"
+                    android:text="닉네임"
                     android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:text="닉네임"/>
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:text="안녕하세요!"/>
+            <TextView
+                android:id="@+id/changePwBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:textColor="@color/white"
+                android:text="비밀번호 변경"/>
 
-            </LinearLayout>
 
         </LinearLayout>
 

@@ -46,4 +46,20 @@ interface APIList {
     fun getRequestAddGroup(
         @Header("X-Http-Token") token: String
     ) : Call<BasicResponse>
+
+    @FormUrlEncoded
+    @PATCH("/user")
+    fun patchRequestNickChange(
+        @Header("X-Http-Token") token: String,
+        @Field("field") field: String,
+        @Field("value") value: String
+    ) : Call<BasicResponse>
+
+    @FormUrlEncoded
+    @PATCH("/user/password")
+    fun patchRequestPwChange(
+        @Header("X-Http-Token") token: String,
+        @Field("current_password") currentPw: String,
+        @Field("new_password") newPw: String
+    ) : Call<BasicResponse>
 }

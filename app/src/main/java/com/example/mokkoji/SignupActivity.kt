@@ -114,4 +114,5 @@ class SignupActivity : BaseActivity() {
 
         })
     }
+
 }

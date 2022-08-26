@@ -33,4 +33,6 @@ abstract class BaseActivity : AppCompatActivity() {
         val myToolbar = defaultActionBar.customView.parent as androidx.appcompat.widget.Toolbar
         myToolbar.setContentInsetsAbsolute(0,0)
     }
+
+
 }
