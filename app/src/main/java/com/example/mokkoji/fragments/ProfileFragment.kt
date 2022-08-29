@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -49,18 +50,22 @@ class ProfileFragment : BaseFragment() {
 
         binding.nickTxt.setOnClickListener {
             val customView = LayoutInflater.from(mContext).inflate(R.layout.custom_alert_dialog, null)
+            val positiveBtn = customView.findViewById<Button>(R.id.positiveBtn)
+            val negativeBtn = customView.findViewById<Button>(R.id.negativeBtn)
+
 
             val alert = AlertDialog.Builder(mContext)
-                .setTitle("닉네임 변경")
+                .setMessage("닉네임을 변경하시겠습니까?")
                 .setView(customView)
-                .setPositiveButton("변경하기", DialogInterface.OnClickListener { dialogInterface, i ->
+                .create()
+
+                positiveBtn.setOnClickListener {
                     val inputEdt = customView.findViewById<EditText>(R.id.inputEdt)
                     val inputNick = inputEdt.text.toString()
                     val token = ContextUtil.getLoginToken(mContext)
 
                     if (inputNick.isBlank()){
                         Toast.makeText(mContext, "입력되지 않았습니다", Toast.LENGTH_SHORT).show()
-                        return@OnClickListener
                     }
 
                     apiList.getRequestCheck("NICK_NAME", inputNick).enqueue(object : Callback<BasicResponse>{
@@ -79,9 +84,8 @@ class ProfileFragment : BaseFragment() {
 
                     })
 
-                    if (!isNickOk){
+                    if (!isNickOk && !inputNick.isBlank()){
                         Toast.makeText(mContext, "중복된 닉네임이 있습니다", Toast.LENGTH_SHORT).show()
-                        return@OnClickListener
                     }
 
                     apiList.patchRequestNickChange(token, "nickname", inputNick).enqueue(object : Callback<BasicResponse>{
@@ -94,19 +98,22 @@ class ProfileFragment : BaseFragment() {
                                 GlobalData.loginUser = response.body()!!.data.user
 
                                 binding.nickTxt.text = GlobalData.loginUser!!.nick_name
+                                alert.dismiss()
                             }
                         }
 
                         override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
 
                         }
-
                     })
+                }
 
-                })
-                .setNegativeButton("취소", null)
-                .show()
+            negativeBtn.setOnClickListener {
+                alert.dismiss()
+            }
+            alert.show()
         }
+
 
         binding.logoutBtn.setOnClickListener {
             ContextUtil.clearData(mContext)
@@ -114,6 +121,7 @@ class ProfileFragment : BaseFragment() {
             val myIntent = Intent(mContext, LoginActivity::class.java)
             startActivity(myIntent)
         }
+
     }
 
     override fun setValues() {
