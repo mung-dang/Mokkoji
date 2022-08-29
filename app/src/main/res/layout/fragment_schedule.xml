@@ -15,6 +15,7 @@
             android:background="@color/white"/>
 
         <TextView
+            android:id="@+id/addBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="15dp"

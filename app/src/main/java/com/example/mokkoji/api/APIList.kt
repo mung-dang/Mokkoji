@@ -62,4 +62,15 @@ interface APIList {
         @Field("current_password") currentPw: String,
         @Field("new_password") newPw: String
     ) : Call<BasicResponse>
+
+    @FormUrlEncoded
+    @POST("/appointment")
+    fun postRequestAddAppointment(
+        @Header("X-Http-Token") token: String,
+        @Field("title") title: String,
+        @Field("datetime") datetime: String,
+        @Field("place") place: String,
+        @Field("latitude") latitude : Int,
+        @Field("longitude") longitude : Int,
+    ) : Call<BasicResponse>
 }
