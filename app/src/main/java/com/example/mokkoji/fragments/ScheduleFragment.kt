@@ -1,6 +1,7 @@
 package com.example.mokkoji.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -67,27 +68,23 @@ class ScheduleFragment : BaseFragment() {
         positiveBtn.setOnClickListener {
             val token = ContextUtil.getLoginToken(mContext)
             val inputEdt = customView.findViewById<EditText>(R.id.inputEdt)
-            val inputYear = customView.findViewById<EditText>(R.id.inputYearEdt)
-            val inputMonth = customView.findViewById<EditText>(R.id.inputMonthEdt)
-            val inputDateEdt = customView.findViewById<EditText>(R.id.inputDateEdt)
-            val inputHourEdt = customView.findViewById<EditText>(R.id.inputHourEdt)
-            val inputMinuetEdt = customView.findViewById<EditText>(R.id.inputMinuetEdt)
+
+            val datePick = customView.findViewById<DatePicker>(R.id.datePick)
+            val timePick = customView.findViewById<TimePicker>(R.id.timePick)
+
 
             val title = inputEdt.text.toString()
-            val year = inputYear.text.toString()
-            val month = inputMonth.text.toString()
-            val date = inputDateEdt.text.toString()
-            val hour = inputHourEdt.text.toString()
-            val minuet = inputMinuetEdt.text.toString()
+            val date = datePick.year.toString() + datePick.month.toString() + datePick.dayOfMonth.toString()
+            val time = timePick.currentHour.toString() + timePick.currentMinute.toString()
+            val dateTime = date + time
 
-            val dateTime = year+month+date+hour+minuet
 
-            if (title.isBlank() && year.isBlank() && month.isBlank() && date.isBlank() && hour.isBlank() && minuet.isBlank()){
-                Toast.makeText(mContext, "공백이 있습니다", Toast.LENGTH_SHORT).show()
+            if (title.isBlank()){
+                Toast.makeText(mContext, "일정 내용을 입력해주세요", Toast.LENGTH_SHORT).show()
             }
 
             apiList.postRequestAddAppointment(
-                token, title, dateTime, "place", 0, 0
+                token, title, dateTime, "기본", 0, 0
             ).enqueue(object : Callback<BasicResponse>{
                 override fun onResponse(
                     call: Call<BasicResponse>,
