@@ -13,11 +13,11 @@
             android:text="현재 비밀번호"/>
 
         <EditText
+            android:id="@+id/currentPw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:background="@drawable/custom_editbox"/>
-
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,12 +26,27 @@
             android:text="변경할 비밀번호"/>
 
         <EditText
+            android:id="@+id/changePw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/custom_editbox"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="변경할 비밀번호 확인"/>
+
+        <EditText
+            android:id="@+id/changePwCheck"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:background="@drawable/custom_editbox"/>
 
         <Button
+            android:id="@+id/changePwBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/sea_blue"

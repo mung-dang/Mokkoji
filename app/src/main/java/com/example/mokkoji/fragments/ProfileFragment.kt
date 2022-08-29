@@ -118,6 +118,8 @@ class ProfileFragment : BaseFragment() {
         binding.logoutBtn.setOnClickListener {
             ContextUtil.clearData(mContext)
 
+            GlobalData.loginUser = null
+
             val myIntent = Intent(mContext, LoginActivity::class.java)
             startActivity(myIntent)
         }
