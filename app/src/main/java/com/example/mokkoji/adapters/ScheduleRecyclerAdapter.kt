@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mokkoji.R
 import com.example.mokkoji.datas.AppointmentData
+import com.example.mokkoji.utils.GlobalData
 import java.text.SimpleDateFormat
 
 class ScheduleRecyclerAdapter(
@@ -18,11 +19,18 @@ class ScheduleRecyclerAdapter(
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(item: AppointmentData) {
+            if(item.place == GlobalData.groupTitle){
             val title = itemView.findViewById<TextView>(R.id.title)
             val date = itemView.findViewById<TextView>(R.id.date)
 
             title.text = item.title
             date.text = item.datetime
+            }else{
+                val title = itemView.findViewById<TextView>(R.id.title)
+                val date = itemView.findViewById<TextView>(R.id.date)
+                title.text = null
+                date.text = null
+            }
         }
     }
 

@@ -5,6 +5,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.viewpager2.widget.ViewPager2
 import com.example.mokkoji.adapters.GroupViewPagerAdapter
 import com.example.mokkoji.databinding.ActivityGroupBinding
+import com.example.mokkoji.utils.GlobalData
 
 class GroupActivity : BaseActivity() {
 
@@ -50,6 +51,10 @@ class GroupActivity : BaseActivity() {
 
         setCustomActionBar()
 
+    }
 
+    override fun onPause() {
+        super.onPause()
+        GlobalData.groupTitle = null
     }
 }
