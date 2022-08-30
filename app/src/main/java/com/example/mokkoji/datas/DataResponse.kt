@@ -4,7 +4,8 @@ data class DataResponse(
     val token : String,
     val user : UserData,
     val places : List<PlacesData>,
-    val appointment : List<AppointmentData>
+    val appointment : AppointmentData,
+    val appointments : List<AppointmentData>
 ){
 
 }

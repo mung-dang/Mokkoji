@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mokkoji.R
 import com.example.mokkoji.datas.AppointmentData
+import java.text.SimpleDateFormat
 
 class ScheduleRecyclerAdapter(
     val mContext : Context,
@@ -16,7 +18,11 @@ class ScheduleRecyclerAdapter(
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(item: AppointmentData) {
+            val title = itemView.findViewById<TextView>(R.id.title)
+            val date = itemView.findViewById<TextView>(R.id.date)
 
+            title.text = item.title
+            date.text = item.datetime
         }
     }
 

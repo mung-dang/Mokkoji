@@ -14,7 +14,6 @@ import retrofit2.Response
 class AddGroupActivity : BaseActivity() {
 
     lateinit var binding: ActivityAddGroupBinding
-    val mGroupList = ArrayList<PlacesData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

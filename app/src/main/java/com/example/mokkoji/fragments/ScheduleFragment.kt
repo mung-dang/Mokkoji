@@ -1,7 +1,9 @@
 package com.example.mokkoji.fragments
 
 import android.os.Bundle
+import android.os.SystemClock
 import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +20,11 @@ import com.example.mokkoji.utils.ContextUtil
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ScheduleFragment : BaseFragment() {
 
@@ -53,6 +60,8 @@ class ScheduleFragment : BaseFragment() {
         binding.planRecyclerView.adapter = mScheduleAdapter
         binding.planRecyclerView.layoutManager = LinearLayoutManager(mContext)
 
+        getAppointmentFromServer()
+
     }
 
     fun getAddAppointment(){
@@ -68,20 +77,36 @@ class ScheduleFragment : BaseFragment() {
         positiveBtn.setOnClickListener {
             val token = ContextUtil.getLoginToken(mContext)
             val inputEdt = customView.findViewById<EditText>(R.id.inputEdt)
-
+            val title = inputEdt.text.toString()
             val datePick = customView.findViewById<DatePicker>(R.id.datePick)
             val timePick = customView.findViewById<TimePicker>(R.id.timePick)
 
+            val now = Calendar.getInstance()
 
-            val title = inputEdt.text.toString()
-            val date = datePick.year.toString() + datePick.month.toString() + datePick.dayOfMonth.toString()
-            val time = timePick.currentHour.toString() + timePick.currentMinute.toString()
-            val dateTime = date + time
+            now.set(
+                datePick.year, datePick.month, datePick.dayOfMonth, timePick.currentHour, timePick.currentMinute
+            )
+
+            val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
+            val dateTime = sdf.format(now.time)
+
+
+            val currentDay = System.currentTimeMillis()
+            val currentDate = Date(currentDay)
+            val today = sdf.format(currentDate)
 
 
             if (title.isBlank()){
                 Toast.makeText(mContext, "일정 내용을 입력해주세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
+
+            if (dateTime <= today){
+                Toast.makeText(mContext, "현재 이후의 일정을 등록해주세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+
 
             apiList.postRequestAddAppointment(
                 token, title, dateTime, "기본", 0, 0
@@ -93,6 +118,7 @@ class ScheduleFragment : BaseFragment() {
                     if(response.isSuccessful){
                         Toast.makeText(mContext, "일정이 성공적으로 추가되었습니다.", Toast.LENGTH_SHORT).show()
                         alert.dismiss()
+                        mScheduleAdapter.notifyDataSetChanged()
                     }
                 }
 
@@ -106,5 +132,25 @@ class ScheduleFragment : BaseFragment() {
             alert.dismiss()
         }
         alert.show()
+    }
+
+    fun getAppointmentFromServer(){
+        val token = ContextUtil.getLoginToken(mContext)
+        apiList.getRequestAppointment(token).enqueue(object : Callback<BasicResponse>{
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+                if(response.isSuccessful){
+                    mScheduleList.clear()
+
+                    val br = response.body()!!
+                    mScheduleList.addAll(br.data.appointments)
+                    mScheduleAdapter.notifyDataSetChanged()
+                }
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+            }
+
+        })
     }
 }

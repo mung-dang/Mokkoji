@@ -73,4 +73,9 @@ interface APIList {
         @Field("latitude") latitude : Int,
         @Field("longitude") longitude : Int,
     ) : Call<BasicResponse>
+
+    @GET("/appointment")
+    fun getRequestAppointment(
+        @Header("X-Http-Token") token: String,
+    ) : Call<BasicResponse>
 }

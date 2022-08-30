@@ -16,7 +16,11 @@
             android:id="@+id/currentPw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="10dp"
             android:layout_marginBottom="10dp"
+            android:inputType="textPassword"
+            android:imeOptions="actionNext"
+            android:maxLines="1"
             android:background="@drawable/custom_editbox"/>
 
         <TextView
@@ -29,7 +33,11 @@
             android:id="@+id/changePw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="10dp"
             android:layout_marginBottom="10dp"
+            android:inputType="textPassword"
+            android:imeOptions="actionNext"
+            android:maxLines="1"
             android:background="@drawable/custom_editbox"/>
 
         <TextView
@@ -42,7 +50,11 @@
             android:id="@+id/changePwCheck"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="10dp"
             android:layout_marginBottom="10dp"
+            android:inputType="textPassword"
+            android:imeOptions="actionDone"
+            android:maxLines="1"
             android:background="@drawable/custom_editbox"/>
 
         <Button
