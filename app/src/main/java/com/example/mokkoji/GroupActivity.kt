@@ -23,7 +23,9 @@ class GroupActivity : BaseActivity() {
         binding.groupBottomNav.setOnItemSelectedListener {
             when (it.itemId){
                 R.id.groupHome -> binding.groupViewPager.currentItem = 0
-                R.id.schedule-> binding.groupViewPager.currentItem = 1
+                R.id.schedule-> {
+                    binding.groupViewPager.currentItem = 1
+                }
                 R.id.post -> binding.groupViewPager.currentItem = 2
             }
             return@setOnItemSelectedListener true
@@ -47,5 +49,7 @@ class GroupActivity : BaseActivity() {
         binding.groupViewPager.adapter = mPagerAdapter
 
         setCustomActionBar()
+
+
     }
 }

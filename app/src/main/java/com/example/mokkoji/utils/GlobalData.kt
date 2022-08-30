@@ -7,6 +7,6 @@ import com.example.mokkoji.datas.UserData
 class GlobalData {
     companion object{
         var loginUser : UserData? = null
-        var groupPlace : PlacesData? = null
+        var groupTitle : String? = null
     }
 }

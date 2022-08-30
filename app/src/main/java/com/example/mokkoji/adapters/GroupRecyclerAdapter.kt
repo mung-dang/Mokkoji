@@ -28,7 +28,9 @@ class GroupRecyclerAdapter(
             itemView.setOnClickListener {
                 val myIntent = Intent(mContext, GroupActivity::class.java)
                 mContext.startActivity(myIntent)
+                GlobalData.groupTitle = item.title
             }
+
 
         }
     }

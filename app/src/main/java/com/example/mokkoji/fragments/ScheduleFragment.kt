@@ -1,5 +1,6 @@
 package com.example.mokkoji.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.SystemClock
 import android.util.Log
@@ -17,6 +18,7 @@ import com.example.mokkoji.databinding.FragmentScheduleBinding
 import com.example.mokkoji.datas.AppointmentData
 import com.example.mokkoji.datas.BasicResponse
 import com.example.mokkoji.utils.ContextUtil
+import com.example.mokkoji.utils.GlobalData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -80,6 +82,7 @@ class ScheduleFragment : BaseFragment() {
             val title = inputEdt.text.toString()
             val datePick = customView.findViewById<DatePicker>(R.id.datePick)
             val timePick = customView.findViewById<TimePicker>(R.id.timePick)
+            val groupTitle = GlobalData.groupTitle.toString()
 
             val now = Calendar.getInstance()
 
@@ -90,11 +93,9 @@ class ScheduleFragment : BaseFragment() {
             val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
             val dateTime = sdf.format(now.time)
 
-
             val currentDay = System.currentTimeMillis()
             val currentDate = Date(currentDay)
             val today = sdf.format(currentDate)
-
 
             if (title.isBlank()){
                 Toast.makeText(mContext, "일정 내용을 입력해주세요", Toast.LENGTH_SHORT).show()
@@ -106,10 +107,8 @@ class ScheduleFragment : BaseFragment() {
                 return@setOnClickListener
             }
 
-
-
             apiList.postRequestAddAppointment(
-                token, title, dateTime, "기본", 0, 0
+                token, title, dateTime, groupTitle, 0, 0
             ).enqueue(object : Callback<BasicResponse>{
                 override fun onResponse(
                     call: Call<BasicResponse>,
@@ -119,6 +118,7 @@ class ScheduleFragment : BaseFragment() {
                         Toast.makeText(mContext, "일정이 성공적으로 추가되었습니다.", Toast.LENGTH_SHORT).show()
                         alert.dismiss()
                         mScheduleAdapter.notifyDataSetChanged()
+                        GlobalData.groupTitle = null
                     }
                 }
 
