@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mokkoji.GroupActivity
 import com.example.mokkoji.R
 import com.example.mokkoji.datas.PlacesData
+import com.example.mokkoji.utils.GlobalData
 
 class GroupRecyclerAdapter(
     val mContext: Context,
@@ -28,6 +29,7 @@ class GroupRecyclerAdapter(
                 val myIntent = Intent(mContext, GroupActivity::class.java)
                 mContext.startActivity(myIntent)
             }
+
         }
     }
 

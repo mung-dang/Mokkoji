@@ -6,6 +6,5 @@ data class PlacesData(
     val Id : Int,
     @SerializedName("name")
     val title : String,
-
 ) {
 }

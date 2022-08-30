@@ -12,12 +12,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
             android:text="내용"/>
 
         <TextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
             android:text="0월 0일 0요일"/>
 
     </LinearLayout>
