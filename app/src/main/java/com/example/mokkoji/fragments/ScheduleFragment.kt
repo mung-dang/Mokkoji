@@ -116,8 +116,8 @@ class ScheduleFragment : BaseFragment() {
                 ) {
                     if(response.isSuccessful){
                         Toast.makeText(mContext, "일정이 성공적으로 추가되었습니다.", Toast.LENGTH_SHORT).show()
-                        alert.dismiss()
                         mScheduleAdapter.notifyDataSetChanged()
+                        alert.dismiss()
                     }
                 }
 

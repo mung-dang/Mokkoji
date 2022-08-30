@@ -78,4 +78,10 @@ interface APIList {
     fun getRequestAppointment(
         @Header("X-Http-Token") token: String,
     ) : Call<BasicResponse>
+
+    @DELETE("/user/place")
+    fun deleteRequestGroup(
+        @Header("X-Http-Token") token: String,
+        @Query("place_id") place_id : Int
+    ) : Call<BasicResponse>
 }

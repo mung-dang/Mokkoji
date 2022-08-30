@@ -1,6 +1,8 @@
 package com.example.mokkoji.adapters
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -29,6 +31,16 @@ class GroupRecyclerAdapter(
                 val myIntent = Intent(mContext, GroupActivity::class.java)
                 mContext.startActivity(myIntent)
                 GlobalData.groupTitle = item.title
+            }
+
+            itemView.setOnLongClickListener{
+                val alert = AlertDialog.Builder(mContext)
+                    .setMessage("이 모꼬지를 삭제하시겠습니까?")
+                    .setPositiveButton("삭제", DialogInterface.OnClickListener { dialogInterface, i ->
+
+                    })
+                    .setNegativeButton("취소", null)
+                true
             }
 
 

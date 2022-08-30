@@ -3,6 +3,7 @@ package com.example.mokkoji
 import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.example.mokkoji.adapters.GroupRecyclerAdapter
 import com.example.mokkoji.databinding.ActivityAddGroupBinding
 import com.example.mokkoji.datas.BasicResponse
 import com.example.mokkoji.datas.PlacesData
@@ -14,6 +15,7 @@ import retrofit2.Response
 class AddGroupActivity : BaseActivity() {
 
     lateinit var binding: ActivityAddGroupBinding
+    lateinit var mGroupAdapter: GroupRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,10 +42,9 @@ class AddGroupActivity : BaseActivity() {
                 ) {
                     if(response.isSuccessful){
                         val br = response.body()!!
+                        mGroupAdapter.notifyDataSetChanged()
                         finish()
-
                     }
-
                 }
 
                 override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
