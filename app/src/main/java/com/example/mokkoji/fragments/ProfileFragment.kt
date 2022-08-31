@@ -185,6 +185,9 @@ class ProfileFragment : BaseFragment() {
                         if (response.isSuccessful){
                             Toast.makeText(mContext, "프로필 사진이 변경되었습니다", Toast.LENGTH_SHORT).show()
                             GlobalData.loginUser = response.body()!!.data.user
+                            Glide.with(mContext)
+                                .load(GlobalData.loginUser!!.profileImg)
+                                .into(binding.profileImg)
                         }
                     }
 

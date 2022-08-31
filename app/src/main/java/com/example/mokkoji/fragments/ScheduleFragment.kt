@@ -51,11 +51,14 @@ class ScheduleFragment : BaseFragment() {
     }
 
     override fun setupEvents() {
-
         binding.addBtn.setOnClickListener {
             getAddAppointment()
         }
 
+        val calendarView = binding.groupCalendar
+        calendarView.setOnDateChangeListener { calendarView, year, month, dayOfMonth ->
+            getAppointmentFromServer()
+        }
     }
 
     override fun setValues() {
@@ -118,6 +121,7 @@ class ScheduleFragment : BaseFragment() {
                     if(response.isSuccessful){
                         Toast.makeText(mContext, "일정이 성공적으로 추가되었습니다.", Toast.LENGTH_SHORT).show()
                         getAppointmentFromServer()
+
                         alert.dismiss()
                     }
                 }

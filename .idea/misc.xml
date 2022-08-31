@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/drawable/custom_editbox.xml" value="0.3535" />
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/drawable/custom_profilebox.xml" value="0.166" />
+        <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/drawable/custom_won.xml" value="0.366" />
+        <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/drawable/ic_baseline_expand_more_24.xml" value="0.2145" />
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/layout/activity_add_group.xml" value="0.25" />
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/layout/activity_change_info.xml" value="0.33256880733944955" />
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/layout/activity_group.xml" value="0.33" />
@@ -12,7 +14,7 @@
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/layout/activity_main.xml" value="0.3255208333333333" />
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/layout/activity_signup.xml" value="0.25" />
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/layout/activity_splash.xml" value="0.33" />
-        <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/layout/custom_action_bar.xml" value="0.25" />
+        <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/layout/custom_action_bar.xml" value="0.5" />
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/layout/custom_alert_dialog.xml" value="0.22" />
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/layout/custom_alert_dialog_schedule.xml" value="0.5" />
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/layout/fragment_group.xml" value="0.33" />
@@ -20,7 +22,7 @@
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/layout/fragment_post.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/layout/fragment_profile.xml" value="0.12140575079872204" />
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/layout/fragment_schedule.xml" value="0.33" />
-        <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/layout/group_list_item.xml" value="0.17039106145251395" />
+        <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/layout/group_list_item.xml" value="0.5" />
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/layout/schedule_list_item.xml" value="0.18888888888888888" />
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/menu/custom_group_menu.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/menu/custom_item.xml" value="0.1175925925925926" />
