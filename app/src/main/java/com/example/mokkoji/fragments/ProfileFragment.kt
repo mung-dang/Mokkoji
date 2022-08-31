@@ -1,6 +1,6 @@
 package com.example.mokkoji.fragments
 
-import android.content.DialogInterface
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.Glide
 import com.example.mokkoji.ChangeInfoActivity
 import com.example.mokkoji.LoginActivity
 import com.example.mokkoji.R
@@ -18,6 +19,8 @@ import com.example.mokkoji.databinding.FragmentProfileBinding
 import com.example.mokkoji.datas.BasicResponse
 import com.example.mokkoji.utils.ContextUtil
 import com.example.mokkoji.utils.GlobalData
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.normal.TedPermission
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,6 +29,7 @@ class ProfileFragment : BaseFragment() {
 
     lateinit var binding: FragmentProfileBinding
     var isNickOk = false
+    private  val REQ_FOR_GALLERY = 1000
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,6 +47,28 @@ class ProfileFragment : BaseFragment() {
     }
 
     override fun setupEvents() {
+
+        binding.profileImg.setOnClickListener {
+            val pl = object : PermissionListener{
+                override fun onPermissionGranted() {
+                    val myIntent = Intent()
+                    myIntent.action = Intent.ACTION_PICK
+                    myIntent.type = android.provider.MediaStore.Images.Media.CONTENT_TYPE
+                    startActivityForResult(myIntent, REQ_FOR_GALLERY)
+                }
+
+                override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+                    Toast.makeText(mContext, "권한이 없습니다", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+
+            TedPermission.create()
+                .setPermissionListener(pl)
+                .setPermissions(Manifest.permission.READ_EXTERNAL_STORAGE)
+                .check()
+        }
+
         binding.changePwBtn.setOnClickListener {
             val myIntent = Intent(mContext, ChangeInfoActivity::class.java)
             startActivityForResult(myIntent, 1000)
@@ -114,7 +140,6 @@ class ProfileFragment : BaseFragment() {
             alert.show()
         }
 
-
         binding.logoutBtn.setOnClickListener {
             ContextUtil.clearData(mContext)
 
@@ -127,6 +152,10 @@ class ProfileFragment : BaseFragment() {
     }
 
     override fun setValues() {
+        Glide.with(mContext)
+            .load(GlobalData.loginUser!!.profileImg)
+            .into(binding.profileImg)
+
         val nick_name = GlobalData.loginUser!!.nick_name
         binding.nickTxt.text = nick_name
 

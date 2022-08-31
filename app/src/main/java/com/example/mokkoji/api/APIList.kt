@@ -84,4 +84,17 @@ interface APIList {
         @Header("X-Http-Token") token: String,
         @Query("place_id") place_id : Int
     ) : Call<BasicResponse>
+
+    @DELETE("/appointment")
+    fun deleteRequestAppointment(
+        @Header("X-Http-Token") token: String,
+        @Query("appointment_id") appointment_id : Int
+    ) : Call<BasicResponse>
+
+    @FormUrlEncoded
+    @PUT("/user/image")
+    fun putRequestUserImage(
+        @Header("X-Http-Token") token: String,
+        @Field("profile_image") profile_image: String
+    ) : Call<BasicResponse>
 }
