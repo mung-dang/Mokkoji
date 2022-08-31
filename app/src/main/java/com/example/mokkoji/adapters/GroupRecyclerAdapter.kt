@@ -25,7 +25,8 @@ import retrofit2.create
 
 class GroupRecyclerAdapter(
     val mContext: Context,
-    val mList: List<PlacesData>
+    val mList: List<PlacesData>,
+
 ) : RecyclerView.Adapter<GroupRecyclerAdapter.MyViewHolder>(){
     val retrofit = ServerAPI.getRetrofit()
     val apiList = retrofit.create(APIList::class.java)
@@ -53,7 +54,7 @@ class GroupRecyclerAdapter(
 
             itemView.setOnLongClickListener {
                 val token = ContextUtil.getLoginToken(mContext)
-                val groupId = item.Id
+                val groupId = item.id
                 val alert = AlertDialog.Builder(mContext)
                     .setMessage("정말 삭제하시겠습니까?")
                     .setPositiveButton("삭제하기", DialogInterface.OnClickListener { dialogInterface, i ->
@@ -96,7 +97,5 @@ class GroupRecyclerAdapter(
     override fun getItemCount(): Int {
         return  mList.size
     }
-
-
 
 }
