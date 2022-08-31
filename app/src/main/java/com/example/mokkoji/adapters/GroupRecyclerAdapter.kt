@@ -53,7 +53,7 @@ class GroupRecyclerAdapter(
 
             itemView.setOnLongClickListener {
                 val token = ContextUtil.getLoginToken(mContext)
-                val groupId = mList[adapterPosition].Id
+                val groupId = item.Id
                 val alert = AlertDialog.Builder(mContext)
                     .setMessage("정말 삭제하시겠습니까?")
                     .setPositiveButton("삭제하기", DialogInterface.OnClickListener { dialogInterface, i ->
