@@ -1,6 +1,7 @@
 package com.example.mokkoji.fragments
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,11 +20,16 @@ import com.example.mokkoji.databinding.FragmentProfileBinding
 import com.example.mokkoji.datas.BasicResponse
 import com.example.mokkoji.utils.ContextUtil
 import com.example.mokkoji.utils.GlobalData
+import com.example.mokkoji.utils.URIPathHelper
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 
 class ProfileFragment : BaseFragment() {
 
@@ -158,6 +164,37 @@ class ProfileFragment : BaseFragment() {
 
         val nick_name = GlobalData.loginUser!!.nick_name
         binding.nickTxt.text = nick_name
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == Activity.RESULT_OK){
+            if(requestCode == REQ_FOR_GALLERY){
+                val selectedImgUri = data?.data!!
+                val file = File(URIPathHelper().getPath(mContext, selectedImgUri))
+                val fileReqBody = RequestBody.create(MediaType.get("image/*"), file)
+                val multiPartBody = MultipartBody.Part.createFormData("profile_image", "myProfile.jpg", fileReqBody)
+
+                val token = ContextUtil.getLoginToken(mContext)
+                apiList.putRequestUserImage(token, multiPartBody).enqueue(object : Callback<BasicResponse>{
+                    override fun onResponse(
+                        call: Call<BasicResponse>,
+                        response: Response<BasicResponse>
+                    ) {
+                        if (response.isSuccessful){
+                            Toast.makeText(mContext, "프로필 사진이 변경되었습니다", Toast.LENGTH_SHORT).show()
+                            GlobalData.loginUser = response.body()!!.data.user
+                        }
+                    }
+
+                    override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                    }
+
+                })
+            }
+        }
 
     }
 }

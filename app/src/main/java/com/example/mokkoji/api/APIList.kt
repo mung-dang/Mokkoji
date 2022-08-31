@@ -1,6 +1,7 @@
 package com.example.mokkoji.api
 
 import com.example.mokkoji.datas.BasicResponse
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -91,10 +92,10 @@ interface APIList {
         @Query("appointment_id") appointment_id : Int
     ) : Call<BasicResponse>
 
-    @FormUrlEncoded
+    @Multipart
     @PUT("/user/image")
     fun putRequestUserImage(
         @Header("X-Http-Token") token: String,
-        @Field("profile_image") profile_image: String
+        @Part img : MultipartBody.Part
     ) : Call<BasicResponse>
 }
