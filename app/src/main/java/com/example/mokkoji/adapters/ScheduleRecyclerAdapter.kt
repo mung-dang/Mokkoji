@@ -17,6 +17,7 @@ class ScheduleRecyclerAdapter(
     val mList : List<AppointmentData>
 ) : RecyclerView.Adapter<ScheduleRecyclerAdapter.MyViewHolder>() {
 
+
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(item: AppointmentData) {
             if(item.place == GlobalData.groupTitle){
