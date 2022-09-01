@@ -67,6 +67,6 @@ class ChangeInfoActivity : BaseActivity() {
     }
 
     override fun setValues() {
-
+        setCustomActionBar()
     }
 }

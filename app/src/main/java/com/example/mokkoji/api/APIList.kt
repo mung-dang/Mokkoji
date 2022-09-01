@@ -98,4 +98,16 @@ interface APIList {
         @Header("X-Http-Token") token: String,
         @Part img : MultipartBody.Part
     ) : Call<BasicResponse>
+
+    @FormUrlEncoded
+    @PUT("/appointment")
+    fun putRequestReAppointment(
+        @Header("X-Http-Token") token: String,
+        @Field("appointment_id") appointment_id: Int,
+        @Field("title") title: String,
+        @Field("datetime") datetime: String,
+        @Field("place") place: String,
+        @Field("latitude") latitude : Int,
+        @Field("longitude") longitude : Int,
+    ) : Call<BasicResponse>
 }

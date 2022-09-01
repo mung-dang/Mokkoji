@@ -66,6 +66,7 @@ class ScheduleFragment : BaseFragment() {
         val sdf = SimpleDateFormat("M/d")
         val finalToday = sdf.format(today)
         binding.today.text = finalToday
+
         binding.groupCalendar.setOnDateChangeListener { calendarView, year, month, dayOfMonth ->
             val date = Calendar.getInstance()
             date.set(Calendar.YEAR, year)
@@ -148,7 +149,8 @@ class ScheduleFragment : BaseFragment() {
                     response: Response<BasicResponse>
                 ) {
                     if(response.isSuccessful){
-                        Toast.makeText(mContext, "일정이 성공적으로 추가되었습니다.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(mContext, "일정이 성공적으로 추가되었습니다", Toast.LENGTH_SHORT).show()
+
                         getAppointmentFromServer()
 
                         alert.dismiss()

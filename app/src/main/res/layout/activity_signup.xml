@@ -44,8 +44,9 @@
                 android:id="@+id/emailCheckBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/sea_blue"
+                android:backgroundTint="@color/white_gray2"
                 android:layout_marginStart="10dp"
+                android:textColor="@color/gray"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:text="중복 확인"/>
@@ -107,8 +108,9 @@
                 android:id="@+id/nickCheckBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/sea_blue"
+                android:backgroundTint="@color/white_gray2"
                 android:layout_marginStart="10dp"
+                android:textColor="@color/gray"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:text="중복 확인"/>
@@ -119,7 +121,8 @@
             android:id="@+id/signupBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/sea_blue"
+            android:backgroundTint="@color/white_gray2"
+            android:textColor="@color/gray"
             android:textSize="16sp"
             android:textStyle="bold"
             android:text="회원가입"/>

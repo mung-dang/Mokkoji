@@ -8,9 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mokkoji.GroupActivity
 import com.example.mokkoji.R
@@ -40,19 +38,20 @@ class ScheduleRecyclerAdapter(
         fun bind(item: AppointmentData) {
             val sdf = SimpleDateFormat("yyyy-MM-dd")
             val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+            val dayTime = SimpleDateFormat("yy-MM-dd   HH:mm")
+
             val dateTime = formatter.parse(item.datetime)
             val finalDate = sdf.format(dateTime)
             val finalTDate = sdf.format(date)
             val title = itemView.findViewById<TextView>(R.id.title)
             val date = itemView.findViewById<TextView>(R.id.date)
-            val news = itemView.findViewById<TextView>(R.id.news)
 
             if(item.place == GlobalData.groupTitle){
-
-
                 if(finalDate.equals(finalTDate)){
+                    val day = formatter.parse(item.datetime)
+                    val tDay = dayTime.format(day)
                     title.text = item.title
-                    date.text = item.datetime
+                    date.text = tDay
                 }else{
                     title.text = null
                     date.text = null
@@ -94,6 +93,69 @@ class ScheduleRecyclerAdapter(
                 true
             }
 
+            itemView.setOnClickListener {
+                val customView = LayoutInflater.from(mContext).inflate(R.layout.custom_alert_dialog_schedule, null)
+                val positiveBtn = customView.findViewById<Button>(R.id.positiveBtn)
+                val negativeBtn = customView.findViewById<Button>(R.id.negativeBtn)
+                val alert = AlertDialog.Builder(mContext)
+                    .setView(customView)
+                    .setMessage("일정을 수정하시겠습니까?")
+                    .create()
+                positiveBtn.text = "수정하기"
+                negativeBtn.text = "취소"
+                positiveBtn.setOnClickListener {
+                    val token = ContextUtil.getLoginToken(mContext)
+                    val inputEdt = customView.findViewById<EditText>(R.id.inputEdt)
+                    val title = inputEdt.text.toString()
+
+                    val datePick = customView.findViewById<DatePicker>(R.id.datePick)
+                    val timePick = customView.findViewById<TimePicker>(R.id.timePick)
+                    val now = Calendar.getInstance()
+
+                    now.set(
+                        datePick.year, datePick.month, datePick.dayOfMonth, timePick.currentHour, timePick.currentMinute
+                    )
+                    val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
+                    val dateTime = sdf.format(now.time)
+
+                    val currentDay = System.currentTimeMillis()
+                    val currentDate = Date(currentDay)
+                    val today = sdf.format(currentDate)
+
+                    if (item.title.isBlank()){
+                        Toast.makeText(mContext, "일정 내용을 입력해주세요", Toast.LENGTH_SHORT).show()
+                        return@setOnClickListener
+                    }
+
+                    if (item.datetime <= today){
+                        Toast.makeText(mContext, "현재 이후의 일정을 등록해주세요", Toast.LENGTH_SHORT).show()
+                        return@setOnClickListener
+                    }
+
+                    apiList.putRequestReAppointment(token, item.id, title, dateTime, item.place, 0, 0).enqueue(object : Callback<BasicResponse>{
+                        override fun onResponse(
+                            call: Call<BasicResponse>,
+                            response: Response<BasicResponse>
+                        ) {
+                            if(response.isSuccessful){
+                                Toast.makeText(mContext, "일정이 변경되었습니다", Toast.LENGTH_SHORT).show()
+                                ((mContext as GroupActivity).supportFragmentManager.findFragmentByTag("f1") as ScheduleFragment).getAppointmentFromServer()
+                                alert.dismiss()
+
+                            }
+                        }
+
+                        override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                        }
+
+                    })
+                }
+                negativeBtn.setOnClickListener {
+                    alert.dismiss()
+                }
+                alert.show()
+            }
 
         }
     }

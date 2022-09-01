@@ -22,15 +22,17 @@
             android:id="@+id/positiveBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/sea_blue"
             android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/white_gray2"
+            android:textColor="@color/gray"
             android:text="추가하기"/>
 
         <Button
             android:id="@+id/negativeBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/sea_blue"
+            android:backgroundTint="@color/white_gray2"
+            android:textColor="@color/gray"
             android:text="취소"/>
 
     </LinearLayout>
