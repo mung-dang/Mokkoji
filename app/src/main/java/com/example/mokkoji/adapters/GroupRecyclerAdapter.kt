@@ -67,7 +67,7 @@ class GroupRecyclerAdapter(
                                 if(response.isSuccessful){
                                     val br = response.body()!!
                                     Toast.makeText(mContext, "삭제되었습니다.", Toast.LENGTH_SHORT).show()
-                                    ((mContext as MainActivity).supportFragmentManager.findFragmentByTag("f2") as GroupFragment).getGroupDataFromServer()
+                                    ((mContext as MainActivity).supportFragmentManager.findFragmentByTag("f0") as GroupFragment).getGroupDataFromServer()
                                 }
                             }
 
