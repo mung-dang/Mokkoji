@@ -30,8 +30,8 @@ class ScheduleRecyclerAdapter(
 ) : RecyclerView.Adapter<ScheduleRecyclerAdapter.MyViewHolder>() {
     val retrofit = ServerAPI.getRetrofit()
     val apiList = retrofit.create(APIList::class.java)
-    val mScheduleList = ArrayList<AppointmentData>()
-
+    var date : Date = Calendar.getInstance().time
+    var mScheduleList = ArrayList<AppointmentData>()
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(item: AppointmentData) {
@@ -39,8 +39,8 @@ class ScheduleRecyclerAdapter(
             val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
             val dateTime = formatter.parse(item.datetime)
             val finalDate = sdf.format(dateTime)
-            val tDate = Calendar.getInstance().time
-            val finalTDate = sdf.format(tDate)
+            val finalTDate = sdf.format(date)
+
             if(item.place == GlobalData.groupTitle){
                 val title = itemView.findViewById<TextView>(R.id.title)
                 val date = itemView.findViewById<TextView>(R.id.date)
@@ -74,6 +74,7 @@ class ScheduleRecyclerAdapter(
                             ) {
                                 if(response.isSuccessful){
                                     val br = response.body()!!
+                                    getAppointmentFromServer()
                                     Toast.makeText(mContext, "삭제되었습니다.", Toast.LENGTH_SHORT).show()
                                 }
                             }
@@ -106,6 +107,25 @@ class ScheduleRecyclerAdapter(
 
     override fun getItemCount(): Int {
         return mList.size
+    }
+
+    fun getAppointmentFromServer(){
+        val token = ContextUtil.getLoginToken(mContext)
+        apiList.getRequestAppointment(token).enqueue(object : Callback<BasicResponse>{
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+                if(response.isSuccessful){
+                    mScheduleList.clear()
+                    val br = response.body()!!
+                    mScheduleList.addAll(br.data.appointments)
+                    notifyDataSetChanged()
+                }
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+            }
+
+        })
     }
 
 }

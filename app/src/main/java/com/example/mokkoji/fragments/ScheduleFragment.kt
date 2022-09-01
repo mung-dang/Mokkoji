@@ -72,6 +72,10 @@ class ScheduleFragment : BaseFragment() {
             date.set(Calendar.MONTH, month)
             date.set(Calendar.DAY_OF_MONTH, dayOfMonth)
             binding.today.text = sdf.format(date.time)
+
+            mScheduleAdapter.date = date.time
+            mScheduleAdapter.mScheduleList = mScheduleList
+            mScheduleAdapter.notifyDataSetChanged()
         }
 
         binding.selectCalendar.setOnClickListener {
