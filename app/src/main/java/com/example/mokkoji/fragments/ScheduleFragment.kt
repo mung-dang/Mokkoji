@@ -7,18 +7,23 @@ import android.util.Log
 
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.inflate
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.resources.Compatibility.Api21Impl.inflate
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mokkoji.R
 import com.example.mokkoji.adapters.ScheduleRecyclerAdapter
+import com.example.mokkoji.databinding.ActivityChangeInfoBinding.inflate
+import com.example.mokkoji.databinding.FragmentProfileBinding.inflate
 import com.example.mokkoji.databinding.FragmentScheduleBinding
 import com.example.mokkoji.datas.AppointmentData
 import com.example.mokkoji.datas.BasicResponse
 import com.example.mokkoji.utils.ContextUtil
 import com.example.mokkoji.utils.GlobalData
+import okio.InflaterSource
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,6 +31,7 @@ import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.*
+import java.util.zip.Inflater
 import kotlin.collections.ArrayList
 
 class ScheduleFragment : BaseFragment() {
@@ -55,9 +61,32 @@ class ScheduleFragment : BaseFragment() {
             getAddAppointment()
         }
 
+        val calendar = Calendar.getInstance()
+        val today = calendar.time
+        val sdf = SimpleDateFormat("M/d")
+        val finalToday = sdf.format(today)
+        binding.today.text = finalToday
         val calendarView = binding.groupCalendar
         calendarView.setOnDateChangeListener { calendarView, year, month, dayOfMonth ->
-            getAppointmentFromServer()
+            binding.today.text = (month+1).toString() + "/" + dayOfMonth.toString()
+            val date = year.toString() + (month+1).toString() + dayOfMonth.toString()
+            val sdf = SimpleDateFormat("yyyy-MM-dd")
+            val finalDate = sdf.format(date)
+
+        }
+
+        binding.selectCalendar.setOnClickListener {
+            if(calendarView.visibility == View.GONE){
+                binding.expand.setImageResource(R.drawable.ic_baseline_expand_more_24)
+                calendarView.visibility = View.VISIBLE
+                return@setOnClickListener
+            }
+            else{
+                binding.expand.setImageResource(R.drawable.ic_baseline_expand_less_24)
+                calendarView.visibility = View.GONE
+                return@setOnClickListener
+            }
+
         }
     }
 
@@ -140,7 +169,7 @@ class ScheduleFragment : BaseFragment() {
 
     fun getAppointmentFromServer(){
         val token = ContextUtil.getLoginToken(mContext)
-        apiList.getRequestAppointment(token).enqueue(object : Callback<BasicResponse>{
+        apiList.getRequestAppointment(token, "").enqueue(object : Callback<BasicResponse>{
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
                 if(response.isSuccessful){
                     mScheduleList.clear()

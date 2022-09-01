@@ -6,20 +6,13 @@
         android:padding="25dp"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginBottom="20dp"
-            android:src="@mipmap/ic_launcher_round"/>
-
         <TextView
             android:id="@+id/groupExpTxt"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginBottom="30dp"
             android:gravity="center"
-            android:background="@drawable/custom_profilebox"
-            android:textColor="@color/white"
+            android:background="@drawable/custom_editbox"
             android:textSize="16sp"
             android:textStyle="bold"
             android:text="모임의 목표를 설정해주세요!"/>
@@ -28,7 +21,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="친구 초대하기"/>
+            android:text="현재 개발 진행중"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/gray"/>
 
 
     </LinearLayout>

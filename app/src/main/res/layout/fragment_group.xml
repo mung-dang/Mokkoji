@@ -5,14 +5,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <Button
+        <TextView
             android:id="@+id/addGroupBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:backgroundTint="@color/sea_blue"
+            android:layout_margin="20dp"
+            android:layout_gravity="end"
+            android:textSize="16sp"
             android:textStyle="bold"
-            android:text="새로운 모꼬지 추가"/>
+            android:text=" + 모꼬지"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/groupRecyclerView"
