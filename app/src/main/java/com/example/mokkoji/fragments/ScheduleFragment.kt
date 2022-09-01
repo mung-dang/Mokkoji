@@ -67,12 +67,11 @@ class ScheduleFragment : BaseFragment() {
         val finalToday = sdf.format(today)
         binding.today.text = finalToday
         binding.groupCalendar.setOnDateChangeListener { calendarView, year, month, dayOfMonth ->
-            binding.today.text = (month+1).toString() + "/" + dayOfMonth.toString()
-            val date = year.toString() + (month+1).toString() + dayOfMonth.toString()
-            val sdfyear = SimpleDateFormat("yyyy-MM-dd")
-            val finalDate = sdfyear.format(date)
-
-
+            val date = Calendar.getInstance()
+            date.set(Calendar.YEAR, year)
+            date.set(Calendar.MONTH, month)
+            date.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            binding.today.text = sdf.format(date.time)
         }
 
         binding.selectCalendar.setOnClickListener {
@@ -169,7 +168,7 @@ class ScheduleFragment : BaseFragment() {
 
     fun getAppointmentFromServer(){
         val token = ContextUtil.getLoginToken(mContext)
-        apiList.getRequestAppointment(token, "").enqueue(object : Callback<BasicResponse>{
+        apiList.getRequestAppointment(token).enqueue(object : Callback<BasicResponse>{
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
                 if(response.isSuccessful){
                     mScheduleList.clear()
@@ -186,4 +185,5 @@ class ScheduleFragment : BaseFragment() {
 
         })
     }
+
 }

@@ -78,7 +78,6 @@ interface APIList {
     @GET("/appointment")
     fun getRequestAppointment(
         @Header("X-Http-Token") token: String,
-        @Query("date") date:String
     ) : Call<BasicResponse>
 
     @DELETE("/user/place")

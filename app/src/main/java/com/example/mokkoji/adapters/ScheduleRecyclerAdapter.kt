@@ -3,6 +3,7 @@ package com.example.mokkoji.adapters
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ScheduleRecyclerAdapter(
     val mContext : Context,
@@ -27,16 +30,29 @@ class ScheduleRecyclerAdapter(
 ) : RecyclerView.Adapter<ScheduleRecyclerAdapter.MyViewHolder>() {
     val retrofit = ServerAPI.getRetrofit()
     val apiList = retrofit.create(APIList::class.java)
+    val mScheduleList = ArrayList<AppointmentData>()
+
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(item: AppointmentData) {
+            val sdf = SimpleDateFormat("yyyy-MM-dd")
+            val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+            val dateTime = formatter.parse(item.datetime)
+            val finalDate = sdf.format(dateTime)
+            val tDate = Calendar.getInstance().time
+            val finalTDate = sdf.format(tDate)
             if(item.place == GlobalData.groupTitle){
-            val title = itemView.findViewById<TextView>(R.id.title)
-            val date = itemView.findViewById<TextView>(R.id.date)
+                val title = itemView.findViewById<TextView>(R.id.title)
+                val date = itemView.findViewById<TextView>(R.id.date)
+                val news = itemView.findViewById<TextView>(R.id.news)
 
-            title.text = item.title
-            date.text = item.datetime
-
+                if(finalDate.contains(finalTDate)){
+                    title.text = item.title
+                    date.text = item.datetime
+                }else{
+                    title.text = null
+                    date.text = null
+                }
             }else{
                 val title = itemView.findViewById<TextView>(R.id.title)
                 val date = itemView.findViewById<TextView>(R.id.date)
@@ -74,6 +90,8 @@ class ScheduleRecyclerAdapter(
 
                 true
             }
+
+
         }
     }
 
