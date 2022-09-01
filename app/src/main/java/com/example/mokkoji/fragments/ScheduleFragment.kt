@@ -74,7 +74,6 @@ class ScheduleFragment : BaseFragment() {
             binding.today.text = sdf.format(date.time)
 
             mScheduleAdapter.date = date.time
-            mScheduleAdapter.mScheduleList = mScheduleList
             mScheduleAdapter.notifyDataSetChanged()
         }
 
@@ -97,9 +96,7 @@ class ScheduleFragment : BaseFragment() {
         mScheduleAdapter = ScheduleRecyclerAdapter(mContext, mScheduleList)
         binding.planRecyclerView.adapter = mScheduleAdapter
         binding.planRecyclerView.layoutManager = LinearLayoutManager(mContext)
-
         getAppointmentFromServer()
-
     }
 
     fun getAddAppointment(){

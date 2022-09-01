@@ -11,11 +11,13 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mokkoji.GroupActivity
+import com.example.mokkoji.MainActivity
 import com.example.mokkoji.R
 import com.example.mokkoji.api.APIList
 import com.example.mokkoji.api.ServerAPI
 import com.example.mokkoji.datas.BasicResponse
 import com.example.mokkoji.datas.PlacesData
+import com.example.mokkoji.fragments.GroupFragment
 import com.example.mokkoji.utils.ContextUtil
 import com.example.mokkoji.utils.GlobalData
 import retrofit2.Call
@@ -25,12 +27,10 @@ import retrofit2.create
 
 class GroupRecyclerAdapter(
     val mContext: Context,
-    val mList: List<PlacesData>,
-
+    val mList: List<PlacesData>
 ) : RecyclerView.Adapter<GroupRecyclerAdapter.MyViewHolder>(){
     val retrofit = ServerAPI.getRetrofit()
     val apiList = retrofit.create(APIList::class.java)
-    val mGroupList = ArrayList<PlacesData>()
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view){
         fun bind(item : PlacesData){
@@ -66,8 +66,8 @@ class GroupRecyclerAdapter(
                             ) {
                                 if(response.isSuccessful){
                                     val br = response.body()!!
-                                    getGroupDataFromServer()
                                     Toast.makeText(mContext, "삭제되었습니다.", Toast.LENGTH_SHORT).show()
+                                    ((mContext as MainActivity).supportFragmentManager.findFragmentByTag("f2") as GroupFragment).getGroupDataFromServer()
                                 }
                             }
 
@@ -98,25 +98,6 @@ class GroupRecyclerAdapter(
 
     override fun getItemCount(): Int {
         return  mList.size
-    }
-
-    fun getGroupDataFromServer(){
-        val token = ContextUtil.getLoginToken(mContext)
-        apiList.getRequestAddGroup(token).enqueue(object : Callback<BasicResponse>{
-            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
-                if(response.isSuccessful){
-                    mGroupList.clear()
-                    val br = response.body()!!
-
-                    mGroupList.addAll(br.data.places)
-                }
-            }
-
-            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
-
-            }
-
-        })
     }
 
 }

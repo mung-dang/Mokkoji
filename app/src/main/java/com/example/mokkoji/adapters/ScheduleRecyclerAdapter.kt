@@ -3,18 +3,22 @@ package com.example.mokkoji.adapters
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.text.Layout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mokkoji.GroupActivity
 import com.example.mokkoji.R
 import com.example.mokkoji.api.APIList
 import com.example.mokkoji.api.ServerAPI
 import com.example.mokkoji.datas.AppointmentData
 import com.example.mokkoji.datas.BasicResponse
+import com.example.mokkoji.fragments.ScheduleFragment
 import com.example.mokkoji.utils.ContextUtil
 import com.example.mokkoji.utils.GlobalData
 import retrofit2.Call
@@ -31,7 +35,6 @@ class ScheduleRecyclerAdapter(
     val retrofit = ServerAPI.getRetrofit()
     val apiList = retrofit.create(APIList::class.java)
     var date : Date = Calendar.getInstance().time
-    var mScheduleList = ArrayList<AppointmentData>()
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(item: AppointmentData) {
@@ -40,13 +43,14 @@ class ScheduleRecyclerAdapter(
             val dateTime = formatter.parse(item.datetime)
             val finalDate = sdf.format(dateTime)
             val finalTDate = sdf.format(date)
+            val title = itemView.findViewById<TextView>(R.id.title)
+            val date = itemView.findViewById<TextView>(R.id.date)
+            val news = itemView.findViewById<TextView>(R.id.news)
 
             if(item.place == GlobalData.groupTitle){
-                val title = itemView.findViewById<TextView>(R.id.title)
-                val date = itemView.findViewById<TextView>(R.id.date)
-                val news = itemView.findViewById<TextView>(R.id.news)
 
-                if(finalDate.contains(finalTDate)){
+
+                if(finalDate.equals(finalTDate)){
                     title.text = item.title
                     date.text = item.datetime
                 }else{
@@ -54,8 +58,6 @@ class ScheduleRecyclerAdapter(
                     date.text = null
                 }
             }else{
-                val title = itemView.findViewById<TextView>(R.id.title)
-                val date = itemView.findViewById<TextView>(R.id.date)
                 title.text = null
                 date.text = null
             }
@@ -74,8 +76,8 @@ class ScheduleRecyclerAdapter(
                             ) {
                                 if(response.isSuccessful){
                                     val br = response.body()!!
-                                    getAppointmentFromServer()
                                     Toast.makeText(mContext, "삭제되었습니다.", Toast.LENGTH_SHORT).show()
+                                    ((mContext as GroupActivity).supportFragmentManager.findFragmentByTag("f1") as ScheduleFragment).getAppointmentFromServer()
                                 }
                             }
 
@@ -107,25 +109,6 @@ class ScheduleRecyclerAdapter(
 
     override fun getItemCount(): Int {
         return mList.size
-    }
-
-    fun getAppointmentFromServer(){
-        val token = ContextUtil.getLoginToken(mContext)
-        apiList.getRequestAppointment(token).enqueue(object : Callback<BasicResponse>{
-            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
-                if(response.isSuccessful){
-                    mScheduleList.clear()
-                    val br = response.body()!!
-                    mScheduleList.addAll(br.data.appointments)
-                    notifyDataSetChanged()
-                }
-            }
-
-            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
-
-            }
-
-        })
     }
 
 }
