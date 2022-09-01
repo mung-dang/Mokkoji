@@ -1,5 +1,6 @@
 package com.example.mokkoji
 
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.widget.Toolbar
@@ -27,7 +28,6 @@ abstract class BaseActivity : AppCompatActivity() {
 
     fun setCustomActionBar (){
         val defaultActionBar = supportActionBar!!
-
         defaultActionBar.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         defaultActionBar.setCustomView(R.layout.custom_action_bar)
         val myToolbar = defaultActionBar.customView.parent as androidx.appcompat.widget.Toolbar

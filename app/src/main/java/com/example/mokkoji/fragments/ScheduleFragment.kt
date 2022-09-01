@@ -66,24 +66,24 @@ class ScheduleFragment : BaseFragment() {
         val sdf = SimpleDateFormat("M/d")
         val finalToday = sdf.format(today)
         binding.today.text = finalToday
-        val calendarView = binding.groupCalendar
-        calendarView.setOnDateChangeListener { calendarView, year, month, dayOfMonth ->
+        binding.groupCalendar.setOnDateChangeListener { calendarView, year, month, dayOfMonth ->
             binding.today.text = (month+1).toString() + "/" + dayOfMonth.toString()
             val date = year.toString() + (month+1).toString() + dayOfMonth.toString()
-            val sdf = SimpleDateFormat("yyyy-MM-dd")
-            val finalDate = sdf.format(date)
+            val sdfyear = SimpleDateFormat("yyyy-MM-dd")
+            val finalDate = sdfyear.format(date)
+
 
         }
 
         binding.selectCalendar.setOnClickListener {
-            if(calendarView.visibility == View.GONE){
+            if(binding.calendarLayout.visibility == View.GONE){
                 binding.expand.setImageResource(R.drawable.ic_baseline_expand_more_24)
-                calendarView.visibility = View.VISIBLE
+                binding.calendarLayout.visibility = View.VISIBLE
                 return@setOnClickListener
             }
             else{
                 binding.expand.setImageResource(R.drawable.ic_baseline_expand_less_24)
-                calendarView.visibility = View.GONE
+                binding.calendarLayout.visibility = View.GONE
                 return@setOnClickListener
             }
 

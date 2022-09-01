@@ -75,6 +75,14 @@ class ProfileFragment : BaseFragment() {
                 .check()
         }
 
+        binding.loginInfoTxtLayout.setOnClickListener {
+            if(binding.loginInfoLayout.visibility == View.GONE){
+                binding.loginInfoLayout.visibility = View.VISIBLE
+            }else{
+                binding.loginInfoLayout.visibility = View.GONE
+            }
+        }
+
         binding.changePwBtn.setOnClickListener {
             val myIntent = Intent(mContext, ChangeInfoActivity::class.java)
             startActivityForResult(myIntent, 1000)

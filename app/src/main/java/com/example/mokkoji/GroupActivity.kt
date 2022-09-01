@@ -1,6 +1,7 @@
 package com.example.mokkoji
 
 import android.os.Bundle
+import androidx.appcompat.app.ActionBar
 import androidx.databinding.DataBindingUtil
 import androidx.viewpager2.widget.ViewPager2
 import com.example.mokkoji.adapters.GroupViewPagerAdapter
@@ -48,9 +49,8 @@ class GroupActivity : BaseActivity() {
     override fun setValues() {
         mPagerAdapter = GroupViewPagerAdapter(this)
         binding.groupViewPager.adapter = mPagerAdapter
-
-        setCustomActionBar()
-
+        val defaultActionBar = supportActionBar!!
+        defaultActionBar.hide()
     }
 
     override fun onPause() {
