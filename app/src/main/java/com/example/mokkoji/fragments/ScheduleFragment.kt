@@ -1,6 +1,7 @@
 package com.example.mokkoji.fragments
 
 import android.os.Bundle
+import android.util.Log
 
 import android.view.LayoutInflater
 import android.view.View
@@ -141,7 +142,6 @@ class ScheduleFragment : BaseFragment() {
 
                         getAppointmentFromServer(mSelectedDate.time)
 
-                        //약속이 추가 된 후 달력표시도 변경?
                         val sdf = SimpleDateFormat("M/d")
                         binding.today.text = sdf.format(mSelectedDate.time)
                         binding.groupCalendar.date = mSelectedDate.timeInMillis
