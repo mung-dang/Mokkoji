@@ -1,37 +1,26 @@
 package com.example.mokkoji.fragments
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.SystemClock
-import android.util.Log
 
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.inflate
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.resources.Compatibility.Api21Impl.inflate
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mokkoji.R
 import com.example.mokkoji.adapters.ScheduleRecyclerAdapter
-import com.example.mokkoji.databinding.ActivityChangeInfoBinding.inflate
-import com.example.mokkoji.databinding.FragmentProfileBinding.inflate
 import com.example.mokkoji.databinding.FragmentScheduleBinding
 import com.example.mokkoji.datas.AppointmentData
 import com.example.mokkoji.datas.BasicResponse
 import com.example.mokkoji.utils.ContextUtil
 import com.example.mokkoji.utils.GlobalData
-import okio.InflaterSource
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDateTime
 import java.util.*
-import java.util.zip.Inflater
 import kotlin.collections.ArrayList
 
 class ScheduleFragment : BaseFragment() {
@@ -39,7 +28,7 @@ class ScheduleFragment : BaseFragment() {
     lateinit var binding: FragmentScheduleBinding
     lateinit var mScheduleAdapter : ScheduleRecyclerAdapter
     val mScheduleList = ArrayList<AppointmentData>()
-
+    val now = Calendar.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -74,8 +63,7 @@ class ScheduleFragment : BaseFragment() {
             date.set(Calendar.DAY_OF_MONTH, dayOfMonth)
             binding.today.text = sdf.format(date.time)
 
-            mScheduleAdapter.date = date.time
-            mScheduleAdapter.notifyDataSetChanged()
+            getAppointmentFromServer(date.time)
         }
 
         binding.selectCalendar.setOnClickListener {
@@ -97,7 +85,7 @@ class ScheduleFragment : BaseFragment() {
         mScheduleAdapter = ScheduleRecyclerAdapter(mContext, mScheduleList)
         binding.planRecyclerView.adapter = mScheduleAdapter
         binding.planRecyclerView.layoutManager = LinearLayoutManager(mContext)
-        getAppointmentFromServer()
+        getAppointmentFromServer(now.time)
     }
 
     fun getAddAppointment(){
@@ -118,14 +106,14 @@ class ScheduleFragment : BaseFragment() {
             val timePick = customView.findViewById<TimePicker>(R.id.timePick)
             val groupTitle = GlobalData.groupTitle.toString()
 
-            val now = Calendar.getInstance()
+            val mSelectedDate = Calendar.getInstance()
 
-            now.set(
+            mSelectedDate.set(
                 datePick.year, datePick.month, datePick.dayOfMonth, timePick.currentHour, timePick.currentMinute
             )
 
             val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
-            val dateTime = sdf.format(now.time)
+            val dateTime = sdf.format(mSelectedDate.time)
 
             val currentDay = System.currentTimeMillis()
             val currentDate = Date(currentDay)
@@ -151,7 +139,12 @@ class ScheduleFragment : BaseFragment() {
                     if(response.isSuccessful){
                         Toast.makeText(mContext, "일정이 성공적으로 추가되었습니다", Toast.LENGTH_SHORT).show()
 
-                        getAppointmentFromServer()
+                        getAppointmentFromServer(mSelectedDate.time)
+
+                        //약속이 추가 된 후 달력표시도 변경?
+                        val sdf = SimpleDateFormat("M/d")
+                        binding.today.text = sdf.format(mSelectedDate.time)
+                        binding.groupCalendar.date = mSelectedDate.timeInMillis
 
                         alert.dismiss()
                     }
@@ -169,7 +162,7 @@ class ScheduleFragment : BaseFragment() {
         alert.show()
     }
 
-    fun getAppointmentFromServer(){
+    fun getAppointmentFromServer(date : Date){
         val token = ContextUtil.getLoginToken(mContext)
         apiList.getRequestAppointment(token).enqueue(object : Callback<BasicResponse>{
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
@@ -177,7 +170,21 @@ class ScheduleFragment : BaseFragment() {
                     mScheduleList.clear()
 
                     val br = response.body()!!
-                    mScheduleList.addAll(br.data.appointments)
+                    val appointmentList = br.data.appointments
+
+                    val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                    val sdf = SimpleDateFormat("yyyy-MM-dd")
+
+                    for (appointment in appointmentList) {
+                        val dateTime = formatter.parse(appointment.datetime)
+                        if (
+                            appointment.place == GlobalData.groupTitle
+                            && sdf.format(dateTime) == sdf.format(date)
+                        ) {
+                            mScheduleList.add(appointment)
+                        }
+                    }
+
                     mScheduleAdapter.notifyDataSetChanged()
                 }
             }

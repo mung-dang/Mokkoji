@@ -3,8 +3,6 @@ package com.example.mokkoji.adapters
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
-import android.text.Layout
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,13 +16,11 @@ import com.example.mokkoji.datas.AppointmentData
 import com.example.mokkoji.datas.BasicResponse
 import com.example.mokkoji.fragments.ScheduleFragment
 import com.example.mokkoji.utils.ContextUtil
-import com.example.mokkoji.utils.GlobalData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 class ScheduleRecyclerAdapter(
     val mContext : Context,
@@ -33,33 +29,20 @@ class ScheduleRecyclerAdapter(
     val retrofit = ServerAPI.getRetrofit()
     val apiList = retrofit.create(APIList::class.java)
     var date : Date = Calendar.getInstance().time
+    val scheduleFragment = (mContext as GroupActivity).supportFragmentManager.findFragmentByTag("f1") as ScheduleFragment
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(item: AppointmentData) {
-            val sdf = SimpleDateFormat("yyyy-MM-dd")
             val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-            val dayTime = SimpleDateFormat("yy-MM-dd   HH:mm")
+            val dayTime = SimpleDateFormat("M월 d일 E요일")
 
-            val dateTime = formatter.parse(item.datetime)
-            val finalDate = sdf.format(dateTime)
-            val finalTDate = sdf.format(date)
-            val title = itemView.findViewById<TextView>(R.id.title)
-            val date = itemView.findViewById<TextView>(R.id.date)
+            val titleTxt = itemView.findViewById<TextView>(R.id.title)
+            val dateTxt = itemView.findViewById<TextView>(R.id.date)
 
-            if(item.place == GlobalData.groupTitle){
-                if(finalDate.equals(finalTDate)){
-                    val day = formatter.parse(item.datetime)
-                    val tDay = dayTime.format(day)
-                    title.text = item.title
-                    date.text = tDay
-                }else{
-                    title.text = null
-                    date.text = null
-                }
-            }else{
-                title.text = null
-                date.text = null
-            }
+            val day = formatter.parse(item.datetime)
+            val tDay = dayTime.format(day)
+            titleTxt.text = item.title
+            dateTxt.text = tDay
 
             itemView.setOnLongClickListener {
                 val token = ContextUtil.getLoginToken(mContext)
@@ -76,7 +59,7 @@ class ScheduleRecyclerAdapter(
                                 if(response.isSuccessful){
                                     val br = response.body()!!
                                     Toast.makeText(mContext, "삭제되었습니다.", Toast.LENGTH_SHORT).show()
-                                    ((mContext as GroupActivity).supportFragmentManager.findFragmentByTag("f1") as ScheduleFragment).getAppointmentFromServer()
+                                    scheduleFragment.getAppointmentFromServer(day)
                                 }
                             }
 
@@ -139,7 +122,7 @@ class ScheduleRecyclerAdapter(
                         ) {
                             if(response.isSuccessful){
                                 Toast.makeText(mContext, "일정이 변경되었습니다", Toast.LENGTH_SHORT).show()
-                                ((mContext as GroupActivity).supportFragmentManager.findFragmentByTag("f1") as ScheduleFragment).getAppointmentFromServer()
+                                scheduleFragment.getAppointmentFromServer(now.time)
                                 alert.dismiss()
 
                             }
