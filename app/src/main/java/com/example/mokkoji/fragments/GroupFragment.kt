@@ -70,6 +70,19 @@ class GroupFragment : BaseFragment() {
                     ) {
                         if(response.isSuccessful){
                             val br = response.body()!!
+                            colosseumApiList.postRequestReply(4, br.data.place.title, null).enqueue(object : Callback<BasicResponse>{
+                                override fun onResponse(
+                                    call: Call<BasicResponse>,
+                                    response: Response<BasicResponse>
+                                ) {
+
+                                }
+
+                                override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                                }
+                            })
+
                             Toast.makeText(mContext, "새 모꼬지가 추가되었습니다", Toast.LENGTH_SHORT).show()
                             getGroupDataFromServer()
                             alert.dismiss()
