@@ -10,7 +10,10 @@ import com.example.mokkoji.R
 import com.example.mokkoji.databinding.FragmentPostAddBinding
 import com.example.mokkoji.databinding.FragmentPostBinding
 import com.example.mokkoji.utils.ContextUtil
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class PostAddFragment : BaseFragment() {
 
@@ -40,11 +43,12 @@ class PostAddFragment : BaseFragment() {
 
             val inputMap = HashMap<String, String>()
 
-            inputMap["deviceToken"] = deviceToken
             inputMap["title"] = inputTitle
             inputMap["content"] = inputContent
+            inputMap["deviceToken"] = deviceToken
 
             database.getReference("post").setValue(inputMap)
+
         }
     }
 

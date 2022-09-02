@@ -4,10 +4,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mokkoji.R
 import com.example.mokkoji.databinding.PostListItemBinding
 import com.example.mokkoji.datas.PostData
+import com.example.mokkoji.utils.ContextUtil
 
 class PostRecyclerAdapter(
     val mContext: Context,
@@ -16,6 +18,14 @@ class PostRecyclerAdapter(
 
     inner class MyViewHolder(view : View) : RecyclerView.ViewHolder(view){
         fun bind(item : PostData){
+            val title = itemView.findViewById<TextView>(R.id.titleTxt)
+            val content = itemView.findViewById<TextView>(R.id.contentTxt)
+
+            title.text = item.title
+            content.text = item.content
+            if (item.deviceToken == ContextUtil.getDeviceToken(mContext)){
+
+            }
         }
     }
 

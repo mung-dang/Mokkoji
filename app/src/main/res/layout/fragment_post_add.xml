@@ -3,14 +3,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="25dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="30dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:text="게시글 작성"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
+            android:textSize="17sp"
+            android:textStyle="bold"
             android:text="제목" />
 
         <EditText
@@ -18,6 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_editbox"
+            android:padding = "10dp"
             android:imeOptions="actionNext"
             android:inputType="text"
             android:maxLines="1" />
@@ -27,6 +38,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:layout_marginTop="30dp"
+            android:textSize="17sp"
+            android:textStyle="bold"
             android:text="내용" />
 
         <EditText
@@ -34,6 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:background="@drawable/custom_editbox"
+            android:padding = "10dp"
             android:imeOptions="actionDone"
             android:inputType="text"
             android:maxLines="5" />
@@ -43,6 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
             android:backgroundTint="@color/white_gray2"
             android:textColor="@color/gray"
             android:text="보내기" />
