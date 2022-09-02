@@ -10,6 +10,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
             android:textSize="30sp"
             android:textStyle="bold"
             android:text="게시판"/>
@@ -19,6 +20,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
+            android:layout_marginBottom="25dp"
+            android:textSize="16sp"
             android:text="작성하기"/>
 
         <androidx.recyclerview.widget.RecyclerView

@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mokkoji.PostAddActivity
 import com.example.mokkoji.R
 import com.example.mokkoji.adapters.PostRecyclerAdapter
 import com.example.mokkoji.databinding.FragmentPostBinding
 import com.example.mokkoji.datas.PostData
+import com.example.mokkoji.utils.GlobalData
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -22,7 +24,7 @@ class PostFragment : BaseFragment() {
     val database = FirebaseDatabase.getInstance("https://mokkoji-4e1ac-default-rtdb.asia-southeast1.firebasedatabase.app/")
 
     lateinit var mPostRecyclerAdapter: PostRecyclerAdapter
-    val mList = ArrayList<PostData>()
+    val mPostList = ArrayList<PostData>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,17 +43,20 @@ class PostFragment : BaseFragment() {
 
     override fun setupEvents() {
         binding.writeBtn.setOnClickListener {
-            val myIntent = Intent(mContext, PostAddFragment::class.java)
+            val myIntent = Intent(mContext, PostAddActivity::class.java)
+                .putExtra("title", GlobalData.groupTitle)
             startActivity(myIntent)
         }
 
-        database.getReference("post")
+        database.getReference("data").child("post")
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    mList.add(0,
+                    mPostList.add(0,
                         PostData(
                             snapshot.child("title").value.toString(),
                             snapshot.child("content").value.toString(),
+                            snapshot.child("place").value.toString(),
+                            snapshot.child("date").value.toString(),
                             snapshot.child("deviceToken").value.toString()
                         )
                     )
@@ -66,7 +71,7 @@ class PostFragment : BaseFragment() {
     }
 
     override fun setValues() {
-        mPostRecyclerAdapter = PostRecyclerAdapter(mContext, mList)
+        mPostRecyclerAdapter = PostRecyclerAdapter(mContext, mPostList)
         binding.postRecyclerView.adapter = mPostRecyclerAdapter
         binding.postRecyclerView.layoutManager = LinearLayoutManager(mContext)
     }

@@ -20,9 +20,12 @@ class PostRecyclerAdapter(
         fun bind(item : PostData){
             val title = itemView.findViewById<TextView>(R.id.titleTxt)
             val content = itemView.findViewById<TextView>(R.id.contentTxt)
+            val date = itemView.findViewById<TextView>(R.id.dateTxt)
 
             title.text = item.title
             content.text = item.content
+            date.text = item.date
+
             if (item.deviceToken == ContextUtil.getDeviceToken(mContext)){
 
             }

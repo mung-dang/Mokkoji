@@ -20,6 +20,9 @@
             android:name=".ChangeInfoActivity"
             android:exported="false" />
         <activity
+            android:name=".PostAddActivity"
+            android:exported="false" />
+        <activity
             android:name=".GroupActivity"
             android:exported="false"/>
         <activity
