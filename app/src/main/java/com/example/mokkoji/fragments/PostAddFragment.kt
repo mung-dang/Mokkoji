@@ -7,12 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.example.mokkoji.R
+import com.example.mokkoji.databinding.FragmentPostAddBinding
 import com.example.mokkoji.databinding.FragmentPostBinding
+import com.example.mokkoji.utils.ContextUtil
 import com.google.firebase.database.FirebaseDatabase
 
-class PostFragment : BaseFragment() {
+class PostAddFragment : BaseFragment() {
 
-    lateinit var binding: FragmentPostBinding
+    lateinit var binding: FragmentPostAddBinding
     val database = FirebaseDatabase.getInstance("https://mokkoji-4e1ac-default-rtdb.asia-southeast1.firebasedatabase.app/")
 
     override fun onCreateView(
@@ -20,7 +22,7 @@ class PostFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_post, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_post_add, container, false)
         return binding.root
     }
 
@@ -31,9 +33,18 @@ class PostFragment : BaseFragment() {
     }
 
     override fun setupEvents() {
-        binding.writeBtn.setOnClickListener {
-            val myIntent = Intent(mContext, PostAddFragment::class.java)
-            startActivityForResult(myIntent, 1001)
+        binding.sendBtn.setOnClickListener {
+            val inputTitle = binding.postTitleEdt.text.toString()
+            val inputContent = binding.postContentEdt.text.toString()
+            val deviceToken = ContextUtil.getDeviceToken(mContext)
+
+            val inputMap = HashMap<String, String>()
+
+            inputMap["deviceToken"] = deviceToken
+            inputMap["title"] = inputTitle
+            inputMap["content"] = inputContent
+
+            database.getReference("post").setValue(inputMap)
         }
     }
 

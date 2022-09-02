@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "510741470016",
+    "project_id": "mokkoji-4e1ac",
+    "storage_bucket": "mokkoji-4e1ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:510741470016:android:e75090faf031e8b9e3b8a5",
+        "android_client_info": {
+          "package_name": "com.example.mokkoji"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "510741470016-vu726i96dddqvgkm1v9s1o9saqigpp6o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVKy_KraH9cOkn5SDzrVtStpjXGlufmUI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "510741470016-vu726i96dddqvgkm1v9s1o9saqigpp6o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

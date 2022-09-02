@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.widget.Toast
 import com.example.mokkoji.datas.BasicResponse
 import com.example.mokkoji.utils.ContextUtil
 import com.example.mokkoji.utils.GlobalData
 import com.google.android.material.internal.ContextUtils
+import com.google.firebase.messaging.FirebaseMessaging
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -46,6 +48,10 @@ class SplashActivity : BaseActivity() {
     }
 
     override fun setValues() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener {
+            Log.d("DeviceToken", it.result)
+            ContextUtil.setDeviceToken(mContext, it.result)
+        }
         val myHandler = Handler(Looper.getMainLooper())
 
         myHandler.postDelayed(
