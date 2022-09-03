@@ -8,12 +8,27 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mokkoji.R
+import com.example.mokkoji.adapters.MonthRecyclerAdapter
 import com.example.mokkoji.databinding.FragmentHomeBinding
+import com.example.mokkoji.datas.AppointmentData
+import com.example.mokkoji.datas.BasicResponse
+import com.example.mokkoji.utils.ContextUtil
+import com.example.mokkoji.utils.GlobalData
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeFragment : BaseFragment() {
 
     lateinit var binding: FragmentHomeBinding
+    lateinit var mMonthAdapter: MonthRecyclerAdapter
+    val mMonthList = ArrayList<AppointmentData>()
+    val now = Calendar.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,6 +71,43 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun setValues() {
+        mMonthAdapter = MonthRecyclerAdapter(mContext, mMonthList)
+        binding.monthRecyclerView.adapter = mMonthAdapter
+        binding.monthRecyclerView.layoutManager = LinearLayoutManager(mContext)
+        getAppointmentFromServer(now.time)
+    }
 
+    fun getAppointmentFromServer(date : Date){
+        val token = ContextUtil.getLoginToken(mContext)
+        apiList.getRequestAppointment(token).enqueue(object : Callback<BasicResponse> {
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+                if(response.isSuccessful){
+                    mMonthList.clear()
+
+                    val br = response.body()!!
+                    val appointmentList = br.data.appointments
+
+                    val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                    val sdf = SimpleDateFormat("yyyy-MM")
+
+                    for (appointment in appointmentList) {
+                        val dateTime = formatter.parse(appointment.datetime)
+                        if (
+                            appointment.place == GlobalData.groupTitle
+                            && sdf.format(dateTime) == sdf.format(date)
+                        ) {
+                            mMonthList.add(appointment)
+                        }
+                    }
+
+                    mMonthAdapter.notifyDataSetChanged()
+                }
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+            }
+
+        })
     }
 }

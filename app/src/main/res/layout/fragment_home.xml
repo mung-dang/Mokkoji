@@ -17,6 +17,16 @@
             android:textStyle="bold"
             android:text="목표를 설정해주세요!"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="이번달 일정"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/monthRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -47,7 +57,7 @@
 
             </LinearLayout>
 
-            <TextView
+           <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
