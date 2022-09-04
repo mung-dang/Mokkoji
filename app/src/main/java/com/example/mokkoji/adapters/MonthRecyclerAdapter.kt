@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mokkoji.R
 import com.example.mokkoji.datas.AppointmentData
+import org.w3c.dom.Text
 import java.text.SimpleDateFormat
 
 class MonthRecyclerAdapter(
@@ -18,7 +19,7 @@ class MonthRecyclerAdapter(
     inner class MyViewHolder(view : View) : RecyclerView.ViewHolder(view){
         fun bind(item: AppointmentData){
             val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-            val dayTime = SimpleDateFormat("d일 E요일")
+            val dayTime = SimpleDateFormat("d일 H시 m분")
 
             val dayTxt = itemView.findViewById<TextView>(R.id.dayTxt)
             val contentTxt = itemView.findViewById<TextView>(R.id.contentTxt)
@@ -42,7 +43,7 @@ class MonthRecyclerAdapter(
     }
 
     override fun getItemCount(): Int {
-        return 4
+        return mList.size
     }
 
 
