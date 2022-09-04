@@ -1,6 +1,7 @@
 package com.example.mokkoji.fragments
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.widget.EditText
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mokkoji.R
+import com.example.mokkoji.UserActivity
 import com.example.mokkoji.adapters.MonthRecyclerAdapter
 import com.example.mokkoji.databinding.FragmentHomeBinding
 import com.example.mokkoji.datas.AppointmentData
@@ -67,6 +69,11 @@ class HomeFragment : BaseFragment() {
                 alert.dismiss()
             }
             alert.show()
+        }
+
+        binding.friendInvite.setOnClickListener {
+            val myIntent = Intent(mContext, UserActivity::class.java)
+            startActivity(myIntent)
         }
     }
 

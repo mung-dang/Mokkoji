@@ -110,4 +110,11 @@ interface APIList {
         @Field("latitude") latitude : Int,
         @Field("longitude") longitude : Int,
     ) : Call<BasicResponse>
+
+    @GET("/search/user")
+    fun getSearchUser(
+        @Header("X-Http-Token") token: String,
+        @Query("nickname") nick: String
+    ) : Call<BasicResponse>
+
 }
