@@ -5,5 +5,4 @@ data class BasicResponse(
     val message : String,
     val data : DataResponse
 ){
-
 }

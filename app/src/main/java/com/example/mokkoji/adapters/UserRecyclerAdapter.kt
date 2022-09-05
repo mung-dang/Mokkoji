@@ -5,10 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.mokkoji.R
 import com.example.mokkoji.datas.UserData
+import com.example.mokkoji.utils.GlobalData
 
 class UserRecyclerAdapter(
     val mContext : Context,
@@ -20,8 +23,13 @@ class UserRecyclerAdapter(
 
             nickTxt.text = item.nick_name
 
-            val invite = itemView.findViewById<Button>(R.id.inviteBtn)
+            val userImage = itemView.findViewById<ImageView>(R.id.userImage)
 
+            Glide.with(mContext)
+                .load(item.profileImg)
+                .into(userImage)
+
+            val invite = itemView.findViewById<Button>(R.id.inviteBtn)
             invite.setOnClickListener {
 
             }
