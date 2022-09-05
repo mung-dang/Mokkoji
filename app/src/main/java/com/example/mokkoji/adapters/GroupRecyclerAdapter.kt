@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.create
+import java.text.SimpleDateFormat
+import java.util.*
 
 class GroupRecyclerAdapter(
     val mContext: Context,
@@ -35,6 +38,7 @@ class GroupRecyclerAdapter(
     val retrofit = ServerAPI.getRetrofit()
     val apiList = retrofit.create(APIList::class.java)
     val database = FirebaseDatabase.getInstance("https://mokkoji-4e1ac-default-rtdb.asia-southeast1.firebasedatabase.app/")
+    val mTodayList = ArrayList<AppointmentData>()
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view){
         fun bind(item : PlacesData){
@@ -44,7 +48,38 @@ class GroupRecyclerAdapter(
 
             title.text = item.title
 
-            groupSchNum.text = "남은 일정 : "
+            val now = Calendar.getInstance()
+            val token = ContextUtil.getLoginToken(mContext)
+            apiList.getRequestAppointment(token).enqueue(object : Callback<BasicResponse>{
+                override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+                    if(response.isSuccessful){
+                        mTodayList.clear()
+
+                        val br = response.body()!!
+                        val appointmentList = br.data.appointments
+
+                        val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                        val sdf = SimpleDateFormat("yyyy-MM-dd")
+
+                        for (appointment in appointmentList) {
+                            val dateTime = formatter.parse(appointment.datetime)
+
+                            if (
+                                appointment.place == item.title
+                                && sdf.format(dateTime) == sdf.format(now.time)
+                            ) {
+                                mTodayList.add(appointment)
+                            }
+                        }
+                        groupSchNum.text = "오늘의 일정 : " + mTodayList.size.toString()
+                    }
+                }
+
+                override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                }
+
+            })
 
             for(data in mList){
                 if (mList.contains(data)){
