@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mokkoji.GroupActivity
+import com.example.mokkoji.MainActivity
 import com.example.mokkoji.R
 import com.example.mokkoji.api.APIList
 import com.example.mokkoji.api.ServerAPI
@@ -60,6 +61,7 @@ class ScheduleRecyclerAdapter(
                                     val br = response.body()!!
                                     Toast.makeText(mContext, "삭제되었습니다.", Toast.LENGTH_SHORT).show()
                                     scheduleFragment.getAppointmentFromServer(day)
+
                                 }
                             }
 

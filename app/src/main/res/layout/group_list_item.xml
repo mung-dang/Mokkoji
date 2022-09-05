@@ -45,17 +45,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
-                    android:text="오늘의 일정 : 없음 "/>
+                    android:text="오늘의 일정 : 0 "/>
 
             </LinearLayout>
 
-            <TextView
+            <ImageView
                 android:id="@+id/news"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginEnd="25dp"
                 android:visibility="gone"
-                android:text="새소식!"/>
+                android:src="@drawable/ic_baseline_alarm_24"/>
 
         </LinearLayout>
 

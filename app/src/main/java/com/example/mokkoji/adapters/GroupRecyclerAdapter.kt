@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
@@ -43,7 +44,7 @@ class GroupRecyclerAdapter(
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view){
         fun bind(item : PlacesData){
             val title = itemView.findViewById<TextView>(R.id.titleTxt)
-            val news = itemView.findViewById<TextView>(R.id.news)
+            val news = itemView.findViewById<ImageView>(R.id.news)
             val groupSchNum = itemView.findViewById<TextView>(R.id.groupSchTxt)
 
             title.text = item.title
@@ -71,7 +72,14 @@ class GroupRecyclerAdapter(
                                 mTodayList.add(appointment)
                             }
                         }
-                        groupSchNum.text = "오늘의 일정 : " + mTodayList.size.toString()
+                        if(mTodayList.size == 0){
+                            groupSchNum.text = "오늘의 일정 : " + mTodayList.size.toString()
+                            news.visibility = View.GONE
+                        }else{
+                            groupSchNum.text = "오늘의 일정 : " + mTodayList.size.toString()
+                            news.visibility = View.VISIBLE
+                        }
+
                     }
                 }
 
@@ -81,13 +89,6 @@ class GroupRecyclerAdapter(
 
             })
 
-            for(data in mList){
-                if (mList.contains(data)){
-                    news.visibility = View.VISIBLE
-                }else{
-                    news.visibility = View.GONE
-                }
-            }
 
 
             itemView.setOnClickListener {
