@@ -51,8 +51,4 @@ class GroupActivity : BaseActivity() {
         defaultActionBar.hide()
     }
 
-    override fun onPause() {
-        super.onPause()
-        GlobalData.groupTitle = null
-    }
 }

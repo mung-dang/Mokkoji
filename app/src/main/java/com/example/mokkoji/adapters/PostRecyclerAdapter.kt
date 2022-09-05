@@ -43,7 +43,7 @@ class PostRecyclerAdapter(
                     .setMessage("정말 삭제하시겠습니까?")
                     .setPositiveButton("삭제하기", DialogInterface.OnClickListener { dialogInterface, i ->
                         Toast.makeText(mContext, "삭제되었습니다", Toast.LENGTH_SHORT).show()
-                        database.getReference("data").child(GlobalData.groupTitle.toString()).removeValue()
+                        database.getReference("data").child(GlobalData.groupTitle.toString()).child(item.id).removeValue()
                     })
                     .setNegativeButton("취소", null)
                     .show()

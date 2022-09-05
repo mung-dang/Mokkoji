@@ -56,7 +56,15 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun setupEvents() {
-        val groupExp = binding.groupExpTxt
+        database.getReference("data").child("goal").addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                binding.groupExpTxt.text = snapshot.child("${GlobalData.groupTitle}").value.toString()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+
         binding.groupExpTxt.setOnClickListener {
             val customView = LayoutInflater.from(mContext).inflate(R.layout.custom_alert_dialog, null)
             val positiveBtn = customView.findViewById<Button>(R.id.positiveBtn)
@@ -72,9 +80,11 @@ class HomeFragment : BaseFragment() {
             positiveBtn.setOnClickListener {
                 val inputMap = HashMap<String, String>()
 
-                inputMap["goal"] = inputExp
+                inputMap["${GlobalData.groupTitle}"] = inputExp
 
-
+                database.getReference("data").child("goal").setValue(inputMap)
+                Toast.makeText(mContext, "목표가 변경되었습니다", Toast.LENGTH_SHORT).show()
+                alert.dismiss()
             }
             negativeBtn.setOnClickListener {
                 alert.dismiss()
@@ -82,13 +92,10 @@ class HomeFragment : BaseFragment() {
             alert.show()
         }
 
-        binding.friendInvite.setOnClickListener {
-            val myIntent = Intent(mContext, UserActivity::class.java)
-            startActivity(myIntent)
-        }
     }
 
     override fun setValues() {
+        binding.groupTitleTxt.text = GlobalData.groupTitle
         mMonthAdapter = MonthRecyclerAdapter(mContext, mMonthList)
         binding.monthRecyclerView.adapter = mMonthAdapter
         binding.monthRecyclerView.layoutManager = LinearLayoutManager(mContext)
