@@ -19,12 +19,17 @@ import com.example.mokkoji.datas.AppointmentData
 import com.example.mokkoji.datas.BasicResponse
 import com.example.mokkoji.utils.ContextUtil
 import com.example.mokkoji.utils.GlobalData
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class HomeFragment : BaseFragment() {
 
@@ -32,6 +37,8 @@ class HomeFragment : BaseFragment() {
     lateinit var mMonthAdapter: MonthRecyclerAdapter
     val mMonthList = ArrayList<AppointmentData>()
     val now = Calendar.getInstance()
+
+    val database = FirebaseDatabase.getInstance("https://mokkoji-4e1ac-default-rtdb.asia-southeast1.firebasedatabase.app/")
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,55 +67,14 @@ class HomeFragment : BaseFragment() {
                 .setMessage("모임의 목표를 입력해주세요")
                 .setView(customView)
                 .create()
-            positiveBtn.text = "추가하기"
+            positiveBtn.text = "변경하기"
             inputEdt.hint = "목표를 입력해주세요"
             positiveBtn.setOnClickListener {
-                val token = ContextUtil.getLoginToken(mContext)
-                val groupTitle = GlobalData.groupTitle.toString() + "goal"
-                val now = Calendar.getInstance()
-                val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
-                val nowTime = sdf.format(now.time)
-                apiList.postRequestAddAppointment(
-                    token, inputExp, nowTime, groupTitle, 0, 0
-                ).enqueue(object : Callback<BasicResponse>{
-                    override fun onResponse(
-                        call: Call<BasicResponse>,
-                        response: Response<BasicResponse>
-                    ) {
-                        if(response.isSuccessful){
-                            apiList.getRequestAppointment(token).enqueue(object : Callback<BasicResponse> {
-                                override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
-                                    if(response.isSuccessful){
-                                        val br = response.body()!!
-                                        val appointmentList = br.data.appointments
-                                        for (appointment in appointmentList) {
-                                            if (
-                                                appointment.place == GlobalData.groupTitle + "goal"
-                                            ) {
-                                                Toast.makeText(mContext, "목표가 변경되었습니다.", Toast.LENGTH_SHORT).show()
-                                                groupExp.text = appointment.title
-                                            }
-                                        }
+                val inputMap = HashMap<String, String>()
 
-                                    }
-                                }
+                inputMap["goal"] = inputExp
 
-                                override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
 
-                                }
-
-                            })
-
-                            alert.dismiss()
-                        }
-                    }
-
-                    override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
-
-                    }
-
-                })
-                alert.dismiss()
             }
             negativeBtn.setOnClickListener {
                 alert.dismiss()

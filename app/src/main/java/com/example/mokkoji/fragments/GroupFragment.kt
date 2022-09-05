@@ -16,6 +16,8 @@ import com.example.mokkoji.databinding.FragmentGroupBinding
 import com.example.mokkoji.datas.BasicResponse
 import com.example.mokkoji.datas.PlacesData
 import com.example.mokkoji.utils.ContextUtil
+import com.example.mokkoji.utils.GlobalData
+import com.google.firebase.database.FirebaseDatabase
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
