@@ -50,9 +50,4 @@ class GroupActivity : BaseActivity() {
         val defaultActionBar = supportActionBar!!
         defaultActionBar.hide()
     }
-
-    override fun onPause() {
-        super.onPause()
-        GlobalData.groupTitle = null
-    }
 }

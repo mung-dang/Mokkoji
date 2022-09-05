@@ -8,25 +8,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.os.persistableBundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mokkoji.R
-import com.example.mokkoji.databinding.PostListItemBinding
-import com.example.mokkoji.datas.BasicResponse
 import com.example.mokkoji.datas.PostData
-import com.example.mokkoji.utils.ContextUtil
 import com.example.mokkoji.utils.GlobalData
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.google.firebase.database.ValueEventListener
 
 class PostRecyclerAdapter(
     val mContext: Context,
     val mList : List<PostData>
 ) : RecyclerView.Adapter<PostRecyclerAdapter.MyViewHolder>() {
 
-    val database = FirebaseDatabase.getInstance("https://mokkoji-4e1ac-default-rtdb.asia-southeast1.firebasedatabase.app/")
+    val database = FirebaseDatabase.getInstance("https://realtimedb-441a2-default-rtdb.asia-southeast1.firebasedatabase.app/")
 
     inner class MyViewHolder(view : View) : RecyclerView.ViewHolder(view){
         fun bind(item : PostData){
@@ -43,7 +39,8 @@ class PostRecyclerAdapter(
                     .setMessage("정말 삭제하시겠습니까?")
                     .setPositiveButton("삭제하기", DialogInterface.OnClickListener { dialogInterface, i ->
                         Toast.makeText(mContext, "삭제되었습니다", Toast.LENGTH_SHORT).show()
-                        database.getReference("data").child(GlobalData.groupTitle.toString()).removeValue()
+
+                        database.getReference("data").child(GlobalData.groupTitle.toString()).child(item.id).removeValue()
                     })
                     .setNegativeButton("취소", null)
                     .show()
