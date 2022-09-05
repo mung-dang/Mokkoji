@@ -19,7 +19,7 @@ import kotlin.collections.HashMap
 class PostAddActivity : BaseActivity() {
 
     lateinit var binding: ActivityPostAddBinding
-    val database = FirebaseDatabase.getInstance("https://mokkoji-4e1ac-default-rtdb.asia-southeast1.firebasedatabase.app/")
+    val database = FirebaseDatabase.getInstance("https://realtimedb-441a2-default-rtdb.asia-southeast1.firebasedatabase.app/")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +46,7 @@ class PostAddActivity : BaseActivity() {
             inputMap["date"] = nowString
             inputMap["deviceToken"] = deviceToken
 
-            database.getReference("data").child("post").setValue(inputMap)
+            database.getReference("data").child("${place}").push().setValue(inputMap)
 
             finish()
         }

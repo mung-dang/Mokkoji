@@ -20,6 +20,7 @@ import com.example.mokkoji.datas.PlacesData
 import com.example.mokkoji.fragments.GroupFragment
 import com.example.mokkoji.utils.ContextUtil
 import com.example.mokkoji.utils.GlobalData
+import com.google.firebase.database.FirebaseDatabase
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,6 +32,7 @@ class GroupRecyclerAdapter(
 ) : RecyclerView.Adapter<GroupRecyclerAdapter.MyViewHolder>(){
     val retrofit = ServerAPI.getRetrofit()
     val apiList = retrofit.create(APIList::class.java)
+    val database = FirebaseDatabase.getInstance("https://realtimedb-441a2-default-rtdb.asia-southeast1.firebasedatabase.app/")
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view){
         fun bind(item : PlacesData){
@@ -68,6 +70,7 @@ class GroupRecyclerAdapter(
                                     val br = response.body()!!
                                     Toast.makeText(mContext, "삭제되었습니다.", Toast.LENGTH_SHORT).show()
                                     ((mContext as MainActivity).supportFragmentManager.findFragmentByTag("f0") as GroupFragment).getGroupDataFromServer()
+                                    database.getReference("data").child(item.title).removeValue()
                                 }
                             }
 

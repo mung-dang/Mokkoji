@@ -2,6 +2,7 @@ package com.example.mokkoji.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,11 +18,12 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import org.json.JSONObject
 
 class PostFragment : BaseFragment() {
 
     lateinit var binding: FragmentPostBinding
-    val database = FirebaseDatabase.getInstance("https://mokkoji-4e1ac-default-rtdb.asia-southeast1.firebasedatabase.app/")
+    val database = FirebaseDatabase.getInstance("https://realtimedb-441a2-default-rtdb.asia-southeast1.firebasedatabase.app/")
 
     lateinit var mPostRecyclerAdapter: PostRecyclerAdapter
     val mPostList = ArrayList<PostData>()
@@ -48,18 +50,21 @@ class PostFragment : BaseFragment() {
             startActivity(myIntent)
         }
 
-        database.getReference("data").child("post")
+        database.getReference("data").child("${GlobalData.groupTitle}")
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    mPostList.add(0,
-                        PostData(
-                            snapshot.child("title").value.toString(),
-                            snapshot.child("content").value.toString(),
-                            snapshot.child("place").value.toString(),
-                            snapshot.child("date").value.toString(),
-                            snapshot.child("deviceToken").value.toString()
+                    mPostList.clear()
+
+                    for (data in snapshot.children) {
+                        val postData = PostData(
+                            data.child("content").value.toString(),
+                            data.child("date").value.toString(),
+                            data.child("deviceToken").value.toString(),
+                            data.child("place").value.toString(),
+                            data.child("title").value.toString(),
                         )
-                    )
+                        mPostList.add(0, postData)
+                    }
                     mPostRecyclerAdapter.notifyDataSetChanged()
                 }
 
