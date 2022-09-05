@@ -56,6 +56,7 @@ class PostFragment : BaseFragment() {
 
                     for(data in snapshot.children){
                         val postData = PostData(
+                            data.key.toString(),
                             data.child("title").value.toString(),
                             data.child("content").value.toString(),
                             data.child("place").value.toString(),
