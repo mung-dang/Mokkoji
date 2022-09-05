@@ -2,6 +2,7 @@ package com.example.mokkoji
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.mokkoji.databinding.ActivitySignupBinding
@@ -37,13 +38,18 @@ class SignupActivity : BaseActivity() {
                 return@setOnClickListener
             }
 
+            if(inputPassword.length < 8){
+                Toast.makeText(mContext, "비밀번호는 8자 이상이어야 합니다", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             if(inputPassword != passwordCheck){
-                Toast.makeText(mContext, "비밀번호가 일치하지 않아요", Toast.LENGTH_SHORT).show()
+                Toast.makeText(mContext, "비밀번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if (!isEmailOk || !isNickOk){
-                Toast.makeText(mContext, "중복확인을 하지 않으셨어요", Toast.LENGTH_SHORT).show()
+                Toast.makeText(mContext, "중복확인을 하지 않으셨습니다", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -103,8 +109,13 @@ class SignupActivity : BaseActivity() {
                     }
                     Toast.makeText(mContext, "중복된 정보가 없습니다", Toast.LENGTH_SHORT).show()
                 }else{
-                    val message = response.message()
-                    Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+                    val errorBody = response.errorBody()!!.string()
+                    val jsonObj = JSONObject(errorBody)
+                    val code = jsonObj.getInt("code")
+                    val message = jsonObj.getString("message")
+                    if(code == 400){
+                        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
 

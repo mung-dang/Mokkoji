@@ -31,7 +31,7 @@ class UserRecyclerAdapter(
 
             val invite = itemView.findViewById<Button>(R.id.inviteBtn)
             invite.setOnClickListener {
-
+                
             }
         }
     }

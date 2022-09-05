@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mokkoji.R
@@ -54,7 +55,7 @@ class HomeFragment : BaseFragment() {
             val positiveBtn = customView.findViewById<Button>(R.id.positiveBtn)
             val negativeBtn = customView.findViewById<Button>(R.id.negativeBtn)
             val inputEdt = customView.findViewById<EditText>(R.id.inputEdt)
-            val inputExp = inputEdt.text
+            val inputExp = inputEdt.text.toString()
             val alert = AlertDialog.Builder(mContext)
                 .setMessage("모임의 목표를 입력해주세요")
                 .setView(customView)
@@ -62,7 +63,51 @@ class HomeFragment : BaseFragment() {
             positiveBtn.text = "추가하기"
             inputEdt.hint = "목표를 입력해주세요"
             positiveBtn.setOnClickListener {
-                groupExp.text = inputExp
+                val token = ContextUtil.getLoginToken(mContext)
+                val groupTitle = GlobalData.groupTitle.toString() + "goal"
+                val now = Calendar.getInstance()
+                val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
+                val nowTime = sdf.format(now.time)
+                apiList.postRequestAddAppointment(
+                    token, inputExp, nowTime, groupTitle, 0, 0
+                ).enqueue(object : Callback<BasicResponse>{
+                    override fun onResponse(
+                        call: Call<BasicResponse>,
+                        response: Response<BasicResponse>
+                    ) {
+                        if(response.isSuccessful){
+                            apiList.getRequestAppointment(token).enqueue(object : Callback<BasicResponse> {
+                                override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+                                    if(response.isSuccessful){
+                                        val br = response.body()!!
+                                        val appointmentList = br.data.appointments
+                                        for (appointment in appointmentList) {
+                                            if (
+                                                appointment.place == GlobalData.groupTitle + "goal"
+                                            ) {
+                                                Toast.makeText(mContext, "목표가 변경되었습니다.", Toast.LENGTH_SHORT).show()
+                                                groupExp.text = appointment.title
+                                            }
+                                        }
+
+                                    }
+                                }
+
+                                override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                                }
+
+                            })
+
+                            alert.dismiss()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                    }
+
+                })
                 alert.dismiss()
             }
             negativeBtn.setOnClickListener {

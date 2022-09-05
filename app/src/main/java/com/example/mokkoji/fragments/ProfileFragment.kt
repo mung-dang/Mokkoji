@@ -123,8 +123,12 @@ class ProfileFragment : BaseFragment() {
                         }
 
                     })
+                    if (inputNick.isBlank()){
+                        Toast.makeText(mContext, "변경할 닉네임을 입력해주세요", Toast.LENGTH_SHORT).show()
+                        return@setOnClickListener
+                    }
 
-                    if (!isNickOk && !inputNick.isBlank()){
+                    if (!isNickOk){
                         Toast.makeText(mContext, "중복된 닉네임이 있습니다", Toast.LENGTH_SHORT).show()
                     }
 

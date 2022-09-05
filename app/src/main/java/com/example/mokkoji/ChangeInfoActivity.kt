@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.mokkoji.databinding.ActivityChangeInfoBinding
 import com.example.mokkoji.datas.BasicResponse
 import com.example.mokkoji.utils.ContextUtil
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,6 +34,11 @@ class ChangeInfoActivity : BaseActivity() {
                 return@setOnClickListener
             }
 
+            if(changePw.length < 8){
+                Toast.makeText(mContext, "비밀번호는 8자 이상이어야 합니다", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             if (changePw != changePwCheck){
                 Toast.makeText(mContext, "변경할 비밀번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -49,7 +55,14 @@ class ChangeInfoActivity : BaseActivity() {
                         finish()
 
                         ContextUtil.setLoginToken(mContext, response.body()!!.data.token)
-
+                    }else{
+                        val errorBody = response.errorBody()!!.string()
+                        val jsonObj = JSONObject(errorBody)
+                        val code = jsonObj.getInt("code")
+                        val message = jsonObj.getString("message")
+                        if(code == 400){
+                            Toast.makeText(mContext, "현재 비밀번호가 맞지 않습니다", Toast.LENGTH_SHORT).show()
+                        }
                     }
 
                 }
