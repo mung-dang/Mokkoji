@@ -46,7 +46,7 @@ class PostAddActivity : BaseActivity() {
             inputMap["date"] = nowString
             inputMap["deviceToken"] = deviceToken
 
-            database.getReference("data").child("post").setValue(inputMap)
+            database.getReference("data").child("${place}").push().setValue(inputMap)
 
             finish()
         }

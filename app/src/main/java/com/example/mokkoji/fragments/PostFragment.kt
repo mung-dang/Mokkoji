@@ -26,6 +26,7 @@ class PostFragment : BaseFragment() {
     lateinit var mPostRecyclerAdapter: PostRecyclerAdapter
     val mPostList = ArrayList<PostData>()
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -48,18 +49,21 @@ class PostFragment : BaseFragment() {
             startActivity(myIntent)
         }
 
-        database.getReference("data").child("post")
+        database.getReference("data").child("${GlobalData.groupTitle}")
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    mPostList.add(0,
-                        PostData(
-                            snapshot.child("title").value.toString(),
-                            snapshot.child("content").value.toString(),
-                            snapshot.child("place").value.toString(),
-                            snapshot.child("date").value.toString(),
-                            snapshot.child("deviceToken").value.toString()
+                    mPostList.clear()
+
+                    for(data in snapshot.children){
+                        val postData = PostData(
+                            data.child("title").value.toString(),
+                            data.child("content").value.toString(),
+                            data.child("place").value.toString(),
+                            data.child("date").value.toString(),
+                            data.child("deviceToken").value.toString(),
                         )
-                    )
+                        mPostList.add(0, postData)
+                    }
                     mPostRecyclerAdapter.notifyDataSetChanged()
                 }
 
