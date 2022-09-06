@@ -4,6 +4,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="10dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -16,8 +17,8 @@
 
             <ImageView
                 android:id="@+id/groupImg"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_marginStart="7dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/custom_won"
@@ -36,15 +37,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
-                    android:textColor="@color/black"
+                    android:fontFamily="@font/gangwon_edu_bold"
                     android:text="모임이름"
-                    android:textSize="20sp" />
+                    android:textSize="30sp" />
 
                 <TextView
                     android:id="@+id/groupSchTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                    android:fontFamily="@font/gangwon_edu_light"
+                    android:textSize="18sp"
                     android:text="오늘의 일정 : 0 "/>
 
             </LinearLayout>

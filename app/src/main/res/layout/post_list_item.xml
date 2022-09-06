@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
-<androidx.cardview.widget.CardView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +15,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="15dp"
-            android:textSize="20sp"
+            android:fontFamily="@font/gangwon_edu_bold"
+            android:textSize="30sp"
             android:textStyle="bold"
             android:text="제목"/>
 
@@ -28,6 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginBottom="5dp"
+            android:fontFamily="@font/gangwon_edu_bold"
+            android:textSize="14sp"
             android:text="입력날짜" />
 
         <View
@@ -40,11 +40,10 @@
             android:id="@+id/contentTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:fontFamily="@font/gangwon_edu_bold"
+            android:textSize="20sp"
             android:text="내용"/>
 
     </LinearLayout>
 
-
-</androidx.cardview.widget.CardView>
 </layout>

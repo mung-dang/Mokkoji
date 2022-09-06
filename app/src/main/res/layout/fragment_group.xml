@@ -5,15 +5,34 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/addGroupBtn"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
             android:layout_gravity="end"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:text=" + 모꼬지"/>
+            android:gravity="center_vertical"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_baseline_add_24"/>
+
+            <TextView
+                android:id="@+id/addGroupBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="end"
+                android:fontFamily="@font/gangwon_edu_bold"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="모꼬지"/>
+
+        </LinearLayout>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/groupRecyclerView"

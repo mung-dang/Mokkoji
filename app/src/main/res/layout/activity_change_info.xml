@@ -10,6 +10,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:fontFamily="@font/gangwon_edu_bold"
+            android:textSize="20sp"
+            android:textStyle="bold"
             android:text="현재 비밀번호"/>
 
         <EditText
@@ -17,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="20dp"
             android:inputType="textPassword"
             android:imeOptions="actionNext"
             android:maxLines="1"
@@ -27,6 +30,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:fontFamily="@font/gangwon_edu_bold"
+            android:textSize="20sp"
+            android:textStyle="bold"
             android:text="변경할 비밀번호"/>
 
         <EditText
@@ -34,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="20dp"
             android:inputType="textPassword"
             android:imeOptions="actionNext"
             android:maxLines="1"
@@ -44,6 +50,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:fontFamily="@font/gangwon_edu_bold"
+            android:textSize="20sp"
+            android:textStyle="bold"
             android:text="변경할 비밀번호 확인"/>
 
         <EditText
@@ -51,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="20dp"
             android:inputType="textPassword"
             android:imeOptions="actionDone"
             android:maxLines="1"
@@ -61,10 +70,12 @@
             android:id="@+id/changePwBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:backgroundTint="@color/white_gray2"
+            android:fontFamily="@font/gangwon_edu_bold"
+            android:textSize="16sp"
             android:text="변경하기"
-            android:textColor="@color/gray"
-            android:textStyle="bold" />
+            android:textColor="@color/gray"/>
 
     </LinearLayout>
 </layout>

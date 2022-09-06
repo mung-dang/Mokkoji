@@ -3,41 +3,85 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="25dp"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@color/sea_blue"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/groupTitleTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="50dp"
-                android:textSize="30sp"
-                android:text="모임 이름"/>
+                android:fontFamily="@font/gangwon_edu_bold"
+                android:text="모임 이름"
+                android:textColor="@color/white"
+                android:textSize="45sp"
+                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/groupExpTxt"
+        </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginBottom="50dp"
-                android:gravity="center"
-                android:background="@drawable/custom_editbox"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:text="목표를 설정해주세요!"/>
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:textSize="18sp"
-                android:text="이번달 일정"/>
+                android:padding="25dp"
+                android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/monthRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="270dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/gangwon_edu_bold"
+                    android:textSize="20sp"
+                    android:text="목표 ! "/>
+
+                <TextView
+                    android:id="@+id/groupExpTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginBottom="40dp"
+                    android:gravity="center"
+                    android:background="@drawable/custom_editbox"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:text="목표를 설정해주세요!"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/gangwon_edu_bold"
+                    android:textSize="20sp"
+                    android:text="이번달 일정"/>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/custom_editbox"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/monthRecyclerView"
+                        android:layout_width="match_parent"
+                        android:paddingTop="3dp"
+                        android:layout_height="270dp"/>
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+
+
+
+
 
     </LinearLayout>
 </layout>

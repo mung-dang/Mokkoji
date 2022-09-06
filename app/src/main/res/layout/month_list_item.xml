@@ -3,33 +3,51 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/scheduleLayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
         android:paddingHorizontal="20dp"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/dayTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:text="0일"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="5dp"
+            android:layout_marginVertical="10dp">
+
+            <TextView
+                android:id="@+id/dayTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/gangwon_edu_light"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="0일"/>
+
+            <ImageView
+                android:layout_width="5dp"
+                android:layout_height="5dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginVertical="10dp"
+                android:backgroundTint="@color/black"
+                android:background="@drawable/custom_won"/>
+
+            <TextView
+                android:id="@+id/contentTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gangwon_edu_light"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="일정 내용"/>
+
+        </LinearLayout>
 
         <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="10dp"
-            android:background="@color/white_gray2"/>
-
-        <TextView
-            android:id="@+id/contentTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:text="일정 내용"/>
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/deep_gray"/>
 
     </LinearLayout>
 
