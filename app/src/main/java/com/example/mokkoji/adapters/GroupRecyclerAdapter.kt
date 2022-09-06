@@ -73,7 +73,7 @@ class GroupRecyclerAdapter(
                             }
                         }
                         if(mTodayList.size == 0){
-                            groupSchNum.text = "오늘의 일정 : " + mTodayList.size.toString()
+                            groupSchNum.text = "오늘의 일정은 없습니다"
                             news.visibility = View.GONE
                         }else{
                             groupSchNum.text = "오늘의 일정 : " + mTodayList.size.toString()

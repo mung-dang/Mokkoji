@@ -82,6 +82,7 @@ class ScheduleRecyclerAdapter(
                 val customView = LayoutInflater.from(mContext).inflate(R.layout.custom_alert_dialog_schedule, null)
                 val positiveBtn = customView.findViewById<Button>(R.id.positiveBtn)
                 val negativeBtn = customView.findViewById<Button>(R.id.negativeBtn)
+                val inputEdt = customView.findViewById<EditText>(R.id.inputEdt)
                 val alert = AlertDialog.Builder(mContext)
                     .setView(customView)
                     .setMessage("일정을 수정하시겠습니까?")

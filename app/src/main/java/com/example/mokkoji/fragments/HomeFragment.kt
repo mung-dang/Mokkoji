@@ -78,11 +78,7 @@ class HomeFragment : BaseFragment() {
             positiveBtn.text = "변경하기"
             inputEdt.hint = "목표를 입력해주세요"
             positiveBtn.setOnClickListener {
-                val inputMap = HashMap<String, String>()
-
-                inputMap["${GlobalData.groupTitle}"] = inputExp
-
-                database.getReference("data").child("goal").setValue(inputMap)
+                database.getReference("data").child("goal").child("${GlobalData.groupTitle}").setValue(inputExp)
                 Toast.makeText(mContext, "목표가 변경되었습니다", Toast.LENGTH_SHORT).show()
                 alert.dismiss()
             }

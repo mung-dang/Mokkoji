@@ -8,6 +8,7 @@
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/drawable/custom_selector.xml" value="0.1" />
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/drawable/custom_won.xml" value="0.366" />
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.367" />
+        <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/drawable/ic_baseline_alarm_24.xml" value="0.113" />
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/drawable/ic_baseline_border_color_24.xml" value="0.367" />
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/drawable/ic_baseline_calendar_month_24.xml" value="0.367" />
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/drawable/ic_baseline_campaign_24.xml" value="0.367" />
@@ -34,7 +35,7 @@
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/layout/fragment_post_add.xml" value="0.2783882783882784" />
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/layout/fragment_schedule.xml" value="0.25" />
-        <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/layout/group_list_item.xml" value="0.5" />
+        <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/layout/group_list_item.xml" value="0.36960985626283366" />
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/layout/incoming_list_item.xml" value="0.30055579307396324" />
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/layout/month_list_item.xml" value="0.30055579307396324" />
         <entry key="..\:/Users/yeaye/AndroidStudioProjects/Mokkoji/app/src/main/res/layout/post_list_item.xml" value="0.25" />
