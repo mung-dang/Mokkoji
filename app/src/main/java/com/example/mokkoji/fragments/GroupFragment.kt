@@ -28,6 +28,11 @@ class GroupFragment : BaseFragment() {
     lateinit var mGroupAdapter: GroupRecyclerAdapter
     val mGroupList = ArrayList<PlacesData>()
 
+    override fun onResume() {
+        super.onResume()
+        getGroupDataFromServer()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

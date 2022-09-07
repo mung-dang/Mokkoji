@@ -48,6 +48,11 @@ class SignupActivity : BaseActivity() {
                 return@setOnClickListener
             }
 
+            if(inputNick.length < 3){
+                Toast.makeText(mContext, "닉네임은 3자 이상이어야 합니다", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             if (!isEmailOk || !isNickOk){
                 Toast.makeText(mContext, "중복확인을 하지 않으셨습니다", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener

@@ -100,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/custom_editbox"
-                android:hint="닉네임 입력(2자 이상)"
+                android:hint="닉네임 입력(3자 이상)"
                 android:imeOptions="actionDone"
                 android:inputType="text"
                 android:maxLines="1"
