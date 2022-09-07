@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mokkoji.R
+import com.example.mokkoji.adapters.GroupRecyclerAdapter
 import com.example.mokkoji.adapters.ScheduleRecyclerAdapter
 import com.example.mokkoji.databinding.FragmentScheduleBinding
 import com.example.mokkoji.datas.AppointmentData
@@ -30,6 +31,7 @@ class ScheduleFragment : BaseFragment() {
     lateinit var mScheduleAdapter : ScheduleRecyclerAdapter
     val mScheduleList = ArrayList<AppointmentData>()
     val now = Calendar.getInstance()
+    lateinit var mGroupAdapter : GroupRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -139,6 +141,7 @@ class ScheduleFragment : BaseFragment() {
                 ) {
                     if(response.isSuccessful){
                         Toast.makeText(mContext, "일정이 성공적으로 추가되었습니다", Toast.LENGTH_SHORT).show()
+                        mGroupAdapter.notifyDataSetChanged()
 
                         getAppointmentFromServer(mSelectedDate.time)
 

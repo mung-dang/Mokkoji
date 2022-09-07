@@ -31,6 +31,7 @@ class ScheduleRecyclerAdapter(
     val apiList = retrofit.create(APIList::class.java)
     var date : Date = Calendar.getInstance().time
     val scheduleFragment = (mContext as GroupActivity).supportFragmentManager.findFragmentByTag("f1") as ScheduleFragment
+    lateinit var mGroupAdapter : GroupRecyclerAdapter
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(item: AppointmentData) {
@@ -61,6 +62,7 @@ class ScheduleRecyclerAdapter(
                                     val br = response.body()!!
                                     Toast.makeText(mContext, "삭제되었습니다.", Toast.LENGTH_SHORT).show()
                                     scheduleFragment.getAppointmentFromServer(day)
+                                    mGroupAdapter.notifyDataSetChanged()
 
                                 }
                             }
