@@ -68,6 +68,7 @@ class GroupFragment : BaseFragment() {
 
                 if(inputTitle.isBlank()){
                     Toast.makeText(mContext, "공백없이 채워주세요", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
                 }
 
                 apiList.postRequestAddGroup(token, inputTitle, 0, 0, false).enqueue(object : Callback<BasicResponse>{

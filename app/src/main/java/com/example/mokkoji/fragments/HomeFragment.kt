@@ -1,7 +1,6 @@
 package com.example.mokkoji.fragments
 
 import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,11 +11,11 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mokkoji.R
-import com.example.mokkoji.UserActivity
 import com.example.mokkoji.adapters.MonthRecyclerAdapter
 import com.example.mokkoji.databinding.FragmentHomeBinding
 import com.example.mokkoji.datas.AppointmentData
 import com.example.mokkoji.datas.BasicResponse
+import com.example.mokkoji.datas.GoalData
 import com.example.mokkoji.utils.ContextUtil
 import com.example.mokkoji.utils.GlobalData
 import com.google.firebase.database.DataSnapshot
@@ -38,7 +37,8 @@ class HomeFragment : BaseFragment() {
     val mMonthList = ArrayList<AppointmentData>()
     val now = Calendar.getInstance()
 
-    val database = FirebaseDatabase.getInstance("https://mokkoji-4e1ac-default-rtdb.asia-southeast1.firebasedatabase.app/")
+    val database =
+        FirebaseDatabase.getInstance("https://mokkoji-4e1ac-default-rtdb.asia-southeast1.firebasedatabase.app/")
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,21 +56,31 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun setupEvents() {
-        database.getReference("data").child("goal").addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                binding.groupExpTxt.text = snapshot.child("${GlobalData.groupTitle}").value.toString()
-            }
+        database.getReference("data").child("${GlobalData.groupTitle}")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (
+                        snapshot.child("${GlobalData.groupTitle}").child("goal").value == null ||
+                        snapshot.child("${GlobalData.groupTitle}").child("goal") == null
+                    ) {
+                        binding.groupExpTxt.text = "목표를 설정해주세요!"
+                    } else {
+                        binding.groupExpTxt.text = snapshot.child("goal").value.toString()
+                    }
 
-            override fun onCancelled(error: DatabaseError) {
-            }
-        })
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                }
+            })
 
         binding.groupExpTxt.setOnClickListener {
-            val customView = LayoutInflater.from(mContext).inflate(R.layout.custom_alert_dialog, null)
+            val customView =
+                LayoutInflater.from(mContext).inflate(R.layout.custom_alert_dialog, null)
             val positiveBtn = customView.findViewById<Button>(R.id.positiveBtn)
             val negativeBtn = customView.findViewById<Button>(R.id.negativeBtn)
             val inputEdt = customView.findViewById<EditText>(R.id.inputEdt)
-            val inputExp = inputEdt.text.toString()
+            val inputExp = inputEdt.text
             val alert = AlertDialog.Builder(mContext)
                 .setMessage("모임의 목표를 입력해주세요")
                 .setView(customView)
@@ -78,9 +88,27 @@ class HomeFragment : BaseFragment() {
             positiveBtn.text = "변경하기"
             inputEdt.hint = "목표를 입력해주세요"
             positiveBtn.setOnClickListener {
-                database.getReference("data").child("goal").child("${GlobalData.groupTitle}").setValue(inputExp)
-                Toast.makeText(mContext, "목표가 변경되었습니다", Toast.LENGTH_SHORT).show()
-                alert.dismiss()
+                val goalMap = HashMap<String, Any>()
+                goalMap["goal"] = inputExp.toString()
+
+                if (inputExp.isBlank()) {
+                    Toast.makeText(mContext, "목표를 입력해주세요", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                if (database.getReference("data").child("${GlobalData.groupTitle}")
+                        .child("goal") == null
+                ) {
+                    database.getReference("data").child("${GlobalData.groupTitle}").child("goal")
+                        .setValue(inputExp)
+                    Toast.makeText(mContext, "목표가 추가되었습니다", Toast.LENGTH_SHORT).show()
+                    alert.dismiss()
+                } else {
+                    database.getReference("data").child("${GlobalData.groupTitle}")
+                        .updateChildren(goalMap.toMutableMap())
+                    Toast.makeText(mContext, "목표가 변경되었습니다", Toast.LENGTH_SHORT).show()
+                    alert.dismiss()
+                }
+
             }
             negativeBtn.setOnClickListener {
                 alert.dismiss()
@@ -98,11 +126,11 @@ class HomeFragment : BaseFragment() {
         getAppointmentFromServer(now.time)
     }
 
-    fun getAppointmentFromServer(date : Date){
+    fun getAppointmentFromServer(date: Date) {
         val token = ContextUtil.getLoginToken(mContext)
         apiList.getRequestAppointment(token).enqueue(object : Callback<BasicResponse> {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
-                if(response.isSuccessful){
+                if (response.isSuccessful) {
                     mMonthList.clear()
 
                     val br = response.body()!!
